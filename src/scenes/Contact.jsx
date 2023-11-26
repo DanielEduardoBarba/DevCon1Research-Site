@@ -82,8 +82,8 @@ export default function Contact() {
                                         : <p className="col-span-2 text-xl font-bold text-green-500">{servRes}</p>
                                     }
                                     <div className="col-span-2 text-right">
-                                        <button onClick={()=>{
-                                            if(!servRes)handleContact()
+                                        <button onClick={(e)=>{
+                                            if(!servRes)handleContact(e)
                                         }} className="py-2 px-4 shadow-xl bg-red-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
                                             Send
                                         </button>
