@@ -22,7 +22,7 @@ export default function Services() {
     function renderServices() {
         const elements = []
         for (let i = 0; i < services.length; i++) {
-            console.log(services[i])
+            // console.log(services[i])
             const el = <a className=" duration-1000 ease opacity-[0.1]" id={i} target="_blank" rel="noreferrer"> <img className=" duration-1000 ease" src={services[i]} width={wl} height={hl} /> </a>
             elements.push(el)
         }
