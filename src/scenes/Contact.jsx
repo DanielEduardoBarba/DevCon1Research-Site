@@ -1,4 +1,3 @@
-
 import config from "../config.json"
 import { useState } from "react"
 
@@ -34,42 +33,18 @@ export default function Contact() {
             },
             body: JSON.stringify(pkg)
         }).then(incoming => {
-                if (incoming.status == 200) setServRes("Message sent succesfully!")
-                else setServRes("Error occurred!")
-                return incoming.json()
-            }).then(response => {
-                console.log("Server responded: ", response)
-            }).catch(console.error)
-
+            if (incoming.status == 200) setServRes("Message sent succesfully!")
+            else setServRes("Error occurred!")
+            return incoming.json()
+        }).then(response => {
+            console.log("Server responded: ", response)
+        }).catch(console.error)
     }
 
-
     return (
-
         <>
-
-            <div className=" flex-col items-center">
-                <div className="border-4 border-green-500 overflow-scroll h-full w-screen">
-
-                    <h2 className="my-6 text-3xl text-center dark:text-white">
-                        Reach out to us about your next great idea!
-                    </h2>
-                    <h2 className="my-6 text-3xl text-center dark:text-white">
-                        Reach out to us about your next great idea!
-                    </h2>
-                    <h2 className="my-6 text-3xl text-center dark:text-white">
-                        Reach out to us about your next great idea!
-                    </h2>
-                    <h2 className="my-6 text-3xl text-center dark:text-white">
-                        Reach out to us about your next great idea!
-                    </h2>
-                    <h2 className="my-6 text-3xl text-center dark:text-white">
-                        Reach out to us about your next great idea!
-                    </h2>
-                    <h2 className="my-6 text-3xl text-center dark:text-white">
-                        Reach out to us about your next great idea!
-                    </h2>
-
+            <div className="flex-col items-center">
+                <div className="overflow-scroll h-full w-screen">
                     <div className="w-full h-min overflow-scroll flex items-center justify-center">
 
                         <div className="flex max-w-sm space-x-3 ">
@@ -112,12 +87,7 @@ export default function Contact() {
 
                 </div>
             </div>
-
-
         </>
-
-
-
     )
 }
 

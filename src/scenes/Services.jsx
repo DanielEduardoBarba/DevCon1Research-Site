@@ -7,8 +7,27 @@ export default function Services() {
     useEffect(()=>{
         setInterval(()=>{
 
-        },1000)
+            const i = Math.floor(Math.random()*services.length)
+            console.log(i)
+            document.getElementById(i).style.opacity=1
+            document.getElementById(i).style.scale=1.1
+            setTimeout(()=>{
+                document.getElementById(i).style.opacity=0.2
+                document.getElementById(i).style.scale=1
+            },750)
+        },1500)
     },[])
+
+
+    function renderServices() {
+        const elements = []
+        for(let i=0;i<services.length;i++){
+            console.log(services[i])
+            const el = <a className=" duration-1000 ease opacity-[0.1]" id={i} target="_blank" rel="noreferrer"> <img className=" duration-1000 ease"  src={services[i]} width={wl} height={hl}/> </a>   
+            elements.push(el)
+          }
+          return elements
+    }
     const wl = 60
     const hl = 60
 
@@ -39,15 +58,6 @@ export default function Services() {
         , "https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg"
     ]
 
-    function renderServices() {
-        const elements = []
-        for(let i=0;i<services.length;i++){
-            console.log(services[i])
-            const el = <a id={i} target="_blank" rel="noreferrer"> <img src={services[i]} width={wl} height={hl}/> </a>   
-            elements.push(el)
-          }
-          return elements
-    }
 
     
 
@@ -63,7 +73,7 @@ export default function Services() {
                         We use the same tech as Silicone Valley!
                     </p>
 
-                    <div className="absolute w-full h-full p-24 z-[-300] opacity-[0.5] bg-white grid grid-cols-6 gap-12">
+                    <div className="absolute w-full h-full p-24 z-[-300] bg-white grid grid-cols-6 gap-12">
                         {
                             renderServices()
                         }

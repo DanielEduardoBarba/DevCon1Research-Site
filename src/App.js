@@ -39,7 +39,7 @@ export default function App() {
     <>
       <main className="relative h-screen overflow-hidden font-mono bg-white dark:bg-gray-800">
         {/* <div className="relative w-screen h-screen overflow-scroll"> */}
-        <Spline scene="https://prod.spline.design/dNQ123nn0WoNdmt8/scene.splinecode" className="absolute z-0 w-full h-full" />
+        {/* <Spline scene="https://prod.spline.design/dNQ123nn0WoNdmt8/scene.splinecode" className="absolute z-0 w-full h-full" /> */}
         <Header scene={scene} setScene={setScene} />
 
         <div style={{
