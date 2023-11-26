@@ -4,29 +4,29 @@ import { useEffect } from "react"
 export default function Services() {
 
 
-    useEffect(()=>{
-        setInterval(()=>{
+    useEffect(() => {
+        setInterval(() => {
 
-            const i = Math.floor(Math.random()*services.length)
+            const i = Math.floor(Math.random() * services.length)
             console.log(i)
-            document.getElementById(i).style.opacity=1
-            document.getElementById(i).style.scale=1.1
-            setTimeout(()=>{
-                document.getElementById(i).style.opacity=0.2
-                document.getElementById(i).style.scale=1
-            },750)
-        },1500)
-    },[])
+            document.getElementById(i).style.opacity = 1
+            document.getElementById(i).style.scale = 1.1
+            setTimeout(() => {
+                document.getElementById(i).style.opacity = 0.2
+                document.getElementById(i).style.scale = 1
+            }, 750)
+        }, 1500)
+    }, [])
 
 
     function renderServices() {
         const elements = []
-        for(let i=0;i<services.length;i++){
+        for (let i = 0; i < services.length; i++) {
             console.log(services[i])
-            const el = <a className=" duration-1000 ease opacity-[0.1]" id={i} target="_blank" rel="noreferrer"> <img className=" duration-1000 ease"  src={services[i]} width={wl} height={hl}/> </a>   
+            const el = <a className=" duration-1000 ease opacity-[0.1]" id={i} target="_blank" rel="noreferrer"> <img className=" duration-1000 ease" src={services[i]} width={wl} height={hl} /> </a>
             elements.push(el)
-          }
-          return elements
+        }
+        return elements
     }
     const wl = 60
     const hl = 60
@@ -59,7 +59,7 @@ export default function Services() {
     ]
 
 
-    
+
 
     return (
         <>
@@ -73,10 +73,13 @@ export default function Services() {
                         We use the same tech as Silicone Valley!
                     </p>
 
-                    <div className="absolute w-full h-full p-24 z-[-300] bg-white grid grid-cols-6 gap-12">
-                        {
-                            renderServices()
-                        }
+
+                    <div className="absolute flex justify-center items-center align-center w-full h-screen p-24 z-[-300] bg-white">
+                        <div className="w-full h-screen grid grid-cols-6 gap-12">
+                            {
+                                renderServices()
+                            }
+                        </div>
                     </div>
 
                     <br />

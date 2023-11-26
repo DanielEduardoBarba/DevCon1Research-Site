@@ -9,8 +9,15 @@ export default function Contact() {
 
         let pkg = {}
         setTimeout(() => {
-            setServRes("")
-        }, 3000)
+            try {
+                setServRes("")
+                document.getElementById("email").value = ""
+                document.getElementById("name").value = ""
+                document.getElementById("comment").value = ""
+            } catch (err) {
+                console.log("ERR contact form: ", err)
+            }
+        }, 5000)
         try {
             const email = document.getElementById("email").value
             const name = document.getElementById("name").value
@@ -50,7 +57,7 @@ export default function Contact() {
                         <div className="flex max-w-sm space-x-3 ">
                             <div className="w-full max-w-2xl px-5 py-10 m-auto mt-10 bg-[#ffffffbb] border-2 border-black rounded-lg shadow dark:bg-gray-800">
                                 <div className="mb-6 text-3xl font-light text-center text-gray-800 dark:text-white">
-                                    Contact us !
+                                    Contact Us
                                 </div>
                                 <div className="grid max-w-xl grid-cols-2 gap-4 m-auto">
                                     {!servRes
@@ -75,7 +82,9 @@ export default function Contact() {
                                         : <p className="col-span-2 text-xl font-bold text-green-500">{servRes}</p>
                                     }
                                     <div className="col-span-2 text-right">
-                                        <button onClick={handleContact} className="py-2 px-4 shadow-xl bg-red-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
+                                        <button onClick={()=>{
+                                            if(!servRes)handleContact()
+                                        }} className="py-2 px-4 shadow-xl bg-red-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
                                             Send
                                         </button>
                                     </div>
