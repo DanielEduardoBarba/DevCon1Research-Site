@@ -1,6 +1,6 @@
 
 
-export default function Chat() {
+export default function Chat({setScene}) {
 
     return (
         <>
@@ -12,9 +12,9 @@ export default function Chat() {
                         </svg>
                     </span>
                     <p className="m-2">
-                        Got a project ?
+                        Got a project?
                     </p>
-                    <a href="#" class="underline">
+                    <a onClick={()=>setScene(2)}  className="m-2 underline">
                         Let's Talk!
                     </a>
                 </div>
