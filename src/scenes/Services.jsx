@@ -23,13 +23,11 @@ export default function Services() {
         const elements = []
         for (let i = 0; i < services.length; i++) {
             // console.log(services[i])
-            const el = <a className=" duration-1000 ease opacity-[0.1]" id={i} target="_blank" rel="noreferrer"> <img className=" duration-1000 ease" src={services[i]} width={wl} height={hl} /> </a>
+            const el = <a className="w-[40px] sm:w-[60px] duration-1000 ease opacity-[.1]" id={i} target="_blank" rel="noreferrer"> <img   src={services[i]} /> </a>
             elements.push(el)
         }
         return elements
     }
-    const wl = 60
-    const hl = 60
 
     const services = [
         "https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg"
@@ -74,8 +72,8 @@ export default function Services() {
                     </p>
 
 
-                    <div className="absolute flex justify-center items-center align-center w-full h-screen p-24 z-[-300] bg-white">
-                        <div className="w-full h-screen grid grid-cols-6 gap-12">
+                    <div className="absolute w-full h-full flex justify-center items-center align-center z-[-300]">
+                        <div className="w-full pt-1/4 grid grid-cols-6 gap-4 sm:gap-12">
                             {
                                 renderServices()
                             }

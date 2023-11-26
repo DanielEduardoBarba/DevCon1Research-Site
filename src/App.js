@@ -13,26 +13,12 @@ import './App.css'
 export default function App() {
 
   const [scene, setScene] = useState(0)
-  const [pageWidth, setPageWidth] = useState(707)
+  const [pageWidth, setPageWidth] = useState(0)
 
 
   useEffect(()=>{
     setPageWidth(window.innerWidth)
   },[scene])
-  // function handleResize() {
-  //   // if(pageWidth) return
-  //   // Get the width of the "scroll-div" element
-  //   const scrollDiv = document.getElementById("scroll-div")
-  //   if (scrollDiv) {
-  //     setPageWidth(window.innerWidth)
-  //     console.log(`Width of scroll-div: ${pageWidth}px`)
-  //   }
-  
-  // }
-  
-  // window.addEventListener("resize", handleResize)
-
-  // handleResize()
 
 
   return (
@@ -40,7 +26,14 @@ export default function App() {
       <main className="relative h-screen overflow-hidden font-mono bg-white dark:bg-gray-800">
         {/* <div className="relative w-screen h-screen overflow-scroll"> */}
         {/* <Spline scene={binCube} className="absolute z-0 w-full h-full" /> */}
-        <Spline scene={"https://prod.spline.design/dNQ123nn0WoNdmt8/scene.splinecode" }className="absolute z-0 w-full h-full" />
+        <Spline style={{
+          opacity:scene==0?1:0
+        }} scene={"https://prod.spline.design/dNQ123nn0WoNdmt8/scene.splinecode" } className="absolute duration-1000 ease z-0 w-full h-full" />
+        <Spline style={{
+          opacity:scene==2?1:0
+        }} scene={"https://prod.spline.design/lpTp8Ng8HpwtBM7m/scene.splinecode" } className="absolute duration-1000 ease z-0 w-full h-full" />
+        
+        
         <Header scene={scene} setScene={setScene} />
 
         <div style={{
