@@ -6,7 +6,7 @@ export default function Header({ scene, setScene }) {
     const [showMenu, setShowMenu] = useState(false)
     return (
         <>
-            <header class="z-30 flex items-center w-full h-14 md:h-24 lg:h-32">
+            <header class="z-50 flex items-center w-full h-14 md:h-24 lg:h-32">
                 <Logo />
                 <div class="container flex items-center justify-end px-6 mx-auto">
 

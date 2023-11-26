@@ -48,14 +48,29 @@ export default function Contact() {
 
         <>
 
-            <div className=" border-2 border-green-500 flex flex-col items-center justify-between mx-auto">
-                <div className=" w-screen flex-col">
+            <div className=" flex-col items-center">
+                <div className="border-4 border-green-500 overflow-scroll h-full w-screen">
 
                     <h2 className="my-6 text-3xl text-center dark:text-white">
                         Reach out to us about your next great idea!
                     </h2>
+                    <h2 className="my-6 text-3xl text-center dark:text-white">
+                        Reach out to us about your next great idea!
+                    </h2>
+                    <h2 className="my-6 text-3xl text-center dark:text-white">
+                        Reach out to us about your next great idea!
+                    </h2>
+                    <h2 className="my-6 text-3xl text-center dark:text-white">
+                        Reach out to us about your next great idea!
+                    </h2>
+                    <h2 className="my-6 text-3xl text-center dark:text-white">
+                        Reach out to us about your next great idea!
+                    </h2>
+                    <h2 className="my-6 text-3xl text-center dark:text-white">
+                        Reach out to us about your next great idea!
+                    </h2>
 
-                    <div className="w-full flex items-center justify-center">
+                    <div className="w-full h-min overflow-scroll flex items-center justify-center">
 
                         <div className="flex max-w-sm space-x-3 ">
                             <div className="w-full max-w-2xl px-5 py-10 m-auto mt-10 bg-[#ffffffbb] border-2 border-black rounded-lg shadow dark:bg-gray-800">

@@ -13,34 +13,40 @@ import './App.css'
 export default function App() {
 
   const [scene, setScene] = useState(0)
-
-  useEffect(() => {
-    // scrollToPos(scene, 2)
-
-  }, [scene])
+  const [pageWidth, setPageWidth] = useState(707)
 
 
+  useEffect(()=>{
+    setPageWidth(window.innerWidth)
+  },[scene])
+  // function handleResize() {
+  //   // if(pageWidth) return
+  //   // Get the width of the "scroll-div" element
+  //   const scrollDiv = document.getElementById("scroll-div")
+  //   if (scrollDiv) {
+  //     setPageWidth(window.innerWidth)
+  //     console.log(`Width of scroll-div: ${pageWidth}px`)
+  //   }
+  
+  // }
+  
+  // window.addEventListener("resize", handleResize)
 
-  function scrollToPos(pos, maxPos) {
-    const scrollableDiv = document.getElementById('scroll-div')
-    const scrollPosition = (scene / maxPos) * (scrollableDiv.scrollWidth - scrollableDiv.clientWidth)
-
-    scrollableDiv.scrollLeft = scrollPosition
-    console.log(scrollPosition)
-  }
+  // handleResize()
 
 
   return (
     <>
-      <main class="relative h-screen overflow-hidden font-mono bg-white dark:bg-gray-800">
+      <main className="relative h-screen overflow-hidden font-mono bg-white dark:bg-gray-800">
+        {/* <div className="relative w-screen h-screen overflow-scroll"> */}
         <Spline scene="https://prod.spline.design/dNQ123nn0WoNdmt8/scene.splinecode" className="absolute z-0 w-full h-full" />
-        
         <Header scene={scene} setScene={setScene} />
 
         <div style={{
-           transform: scene?'translateX(500px)':'translateX(-500px)',
-           transition:"transform 2s ease"
-        }} id="scroll-div" className="absolute  flex w-screen h-full z-0">
+           transform: scene?`translateX(-${pageWidth*scene}px)`:"",
+           transition:"transform 1s ease"
+        }} id="scroll-div" className="absolute flex w-screen z-0">
+
           <Home setScene={setScene} />
           <Services />
           <Contact />
@@ -48,6 +54,7 @@ export default function App() {
 
         <Chat setScene={setScene}/>
         <Footer />
+        {/* </div> */}
       </main>
     </>
   )
