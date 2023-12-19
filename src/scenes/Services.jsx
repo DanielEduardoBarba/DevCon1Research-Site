@@ -13,8 +13,8 @@ export default function Services() {
             setTimeout(() => {
                 document.getElementById(i).style.opacity = 0.2
                 document.getElementById(i).style.scale = 1
-            }, 750)
-        }, 1500)
+            }, 500)
+        }, 700)
     }, [])
 
 
@@ -22,7 +22,8 @@ export default function Services() {
         const elements = []
         for (let i = 0; i < services.length; i++) {
             // console.log(services[i])
-            const el = <a className="w-[40px] sm:w-[60px] duration-1000 ease opacity-[.1]" id={i} target="_blank" rel="noreferrer"> <img   src={services[i]} /> </a>
+            const el = <a className="w-[40px] sm:w-[60px] duration-1000 ease opacity-[.1]" id={i} target="_blank" rel="noreferrer"> 
+            <img className=""   src={services[i]} /> </a>
             elements.push(el)
         }
         return elements
@@ -63,7 +64,7 @@ export default function Services() {
             <div className="flex flex-col w-full items-center justify-between px-6 py-4 mx-auto">
                 {/* <Spline scene="https://prod.spline.design/lpTp8Ng8HpwtBM7m/scene.splinecode" className=" z-0 w-full h-full" /> */}
                 <div className="flex w-screen overflow-scroll flex-col items-center justify-center align-center">
-                    <h2 className="my-6 text-3xl text-center dark:text-white">
+                    <h2 className="my-6 p-1 text-3xl text-center dark:text-white">
                         Full Stack Software and Embedded Development!
                     </h2>
                     <p className="max-w-3xl py-2 mx-auto text-2xl font-bold text-center text-gray-800 md:text-6xl dark:text-white">
@@ -72,7 +73,7 @@ export default function Services() {
 
 
                     <div className="absolute w-full h-full flex justify-center items-center align-center z-[-300]">
-                        <div className="w-full pt-1/4 grid grid-cols-6 gap-4 sm:gap-12">
+                        <div className="flex grid grid-cols-4 xl:grid-cols-6 gap-10 sm:gap-12">
                             {
                                 renderServices()
                             }

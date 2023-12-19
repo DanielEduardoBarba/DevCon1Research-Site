@@ -9,16 +9,7 @@ export default function Contact() {
         e.preventDefault()
 
         let pkg = {}
-        setTimeout(() => {
-            try {
-                setServRes("")
-                document.getElementById("email").value = ""
-                document.getElementById("name").value = ""
-                document.getElementById("comment").value = ""
-            } catch (err) {
-                console.log("ERR contact form: ", err)
-            }
-        }, 5000)
+
         try {
             const email = document.getElementById("email").value
             const name = document.getElementById("name").value

@@ -20,6 +20,18 @@ export default function App() {
     setPageWidth(window.innerWidth)
   },[scene])
 
+  useEffect(()=>{
+    
+    function handleResize(){
+      setPageWidth(window.innerWidth)
+    }
+    
+      window.addEventListener("resize", handleResize)
+      return () => {
+        window.removeEventListener("resize", handleResize)
+      }
+  },[])
+
 
   return (
     <>
