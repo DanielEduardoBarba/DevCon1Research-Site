@@ -5,7 +5,7 @@ export default function Logo(){
     return(
         <>
 
-        <img src={devCon1} className="absolute z-50 bg-black rounded-[5px] lg:rounded-[10px] w-1/2 sm:w-1/4  m-2 md:m-8" />
+        <img src={devCon1} className="absolute z-0 bg-black rounded-[5px] lg:rounded-[10px] w-1/2 sm:w-1/4  m-2 md:m-8" />
         </>
     )
 }

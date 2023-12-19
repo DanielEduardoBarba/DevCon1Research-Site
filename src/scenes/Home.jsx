@@ -12,7 +12,7 @@ export default function Home({setScene}) {
                         Software, IT, and Embedded Solutions
                     </p>
                     <div className="flex items-center justify-center mt-4">
-                        <a onClick={()=>setScene(2)}  className="px-4 py-2 my-2 text-gray-800 uppercase bg-transparent border-2 border-gray-800 md:mt-16 dark:text-gray-800 dark:bg-white hover:dark:bg-gray-100 dark:text-white hover:bg-gray-800 hover:text-white text-md">
+                        <a onClick={()=>setScene(2)}  className="px-4 py-2 my-2 text-gray-800 uppercase bg-white opacity-[0.7] rounded-xl border-2 border-gray-800 md:mt-16 dark:text-gray-800 dark:bg-white hover:dark:bg-gray-100 dark:text-white hover:bg-gray-800 hover:text-white text-md">
                             CONNECT WITH US
                         </a>
                     </div>

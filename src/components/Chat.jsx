@@ -2,13 +2,13 @@ import { useEffect, useState } from "react"
 
 
 export default function Chat({ setScene }) {
-const [hideBeacon, setHideBeacon] = useState(false)
+const [hideBeacon, setHideBeacon] = useState(true)
 const screenWidth = window.innerWidth
 
 useEffect(()=>{
     setTimeout(()=>{
-        setHideBeacon(true)
-    },5000)
+        setHideBeacon(false)
+    },2000)
 },[])
     return (
         <>

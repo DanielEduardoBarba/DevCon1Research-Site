@@ -8,7 +8,6 @@ export default function Services() {
         setInterval(() => {
 
             const i = Math.floor(Math.random() * services.length)
-            console.log(i)
             document.getElementById(i).style.opacity = 1
             document.getElementById(i).style.scale = 1.1
             setTimeout(() => {
@@ -68,7 +67,7 @@ export default function Services() {
                         Full Stack Software and Embedded Development!
                     </h2>
                     <p className="max-w-3xl py-2 mx-auto text-2xl font-bold text-center text-gray-800 md:text-6xl dark:text-white">
-                        We use the same tech as Silicone Valley!
+                        We use the same tech as Silicon Valley!
                     </p>
 
 
