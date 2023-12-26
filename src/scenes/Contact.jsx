@@ -13,13 +13,15 @@ export default function Contact() {
         let pkg = {}
 
         try {
-            const email = document.getElementById("email").value
             const name = document.getElementById("name").value
+            const email = document.getElementById("email").value
+            const phone = document.getElementById("phone").value
             const comment = document.getElementById("comment").value
 
             let notify = ""
             if (!email) notify += " email"
             if (!name) notify += " name"
+            if (!phone) notify += " phone"
             if (!comment) notify += " comment"
             if (notify) {
                 setError("missing:" + notify)
@@ -28,8 +30,9 @@ export default function Contact() {
                 setError("")
             }
             pkg = {
-                email,
                 name,
+                email,
+                phone,
                 comment
             }
         } catch (err) {
@@ -39,8 +42,10 @@ export default function Contact() {
 
         if (isSent) return
         setIsSent(true)
-        document.getElementById("email").style.opacity = 0.5
+
         document.getElementById("name").style.opacity = 0.5
+        document.getElementById("email").style.opacity = 0.5
+        document.getElementById("phone").style.opacity = 0.5
         document.getElementById("comment").style.opacity = 0.5
 
         // return
@@ -88,6 +93,12 @@ export default function Contact() {
                                                 </div>
                                             </div>
                                             <div className="col-span-2 lg:col-span-1">
+                                                <div className=" relative ">
+                                                    <input type="text" id="phone" className=" shadow-xl rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                                        placeholder="Phone" />
+                                                </div>
+                                            </div>
+                                            <div className="col-span-2 lg:col-span-2">
                                                 <div className=" relative ">
                                                     <input type="text" id="email" className=" shadow-xl rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                                                         placeholder="Email" />
