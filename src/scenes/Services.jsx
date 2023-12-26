@@ -63,7 +63,7 @@ export default function Services() {
         <>
             <div className="flex flex-col w-full items-center justify-between px-6 py-4 mx-auto">
                 {/* <Spline scene="https://prod.spline.design/lpTp8Ng8HpwtBM7m/scene.splinecode" className=" z-0 w-full h-full" /> */}
-                <div className="flex w-screen overflow-scroll flex-col items-center justify-center align-center">
+                <div className="flex w-screen overflow-hidden flex-col items-center justify-center align-center">
                     <h2 className="my-6 p-1 text-3xl text-center dark:text-white">
                         Full Stack Software and Embedded Development!
                     </h2>

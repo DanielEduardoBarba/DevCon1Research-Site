@@ -53,8 +53,8 @@ export default function Contact() {
     return (
         <>
             <div className="flex-col items-center ">
-                <div className="overflow-scroll h-full w-screen">
-                    <div className="w-full h-min overflow-scroll flex items-center justify-center">
+                <div className="overflow-hidden h-full w-screen">
+                    <div className="w-full h-min overflow-hidden flex items-center justify-center">
 
                         <div className="flex max-w-sm space-x-3 ">
                             <div className="z-100000 w-full max-w-2xl px-5 py-10 m-auto mt-10 bg-[#ffffffdd] border-2 border-black rounded-lg shadow dark:bg-gray-800">

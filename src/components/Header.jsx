@@ -4,23 +4,46 @@ import Logo from "./Logo"
 
 export default function Header({ scene, setScene }) {
     const [showMenu, setShowMenu] = useState(false)
-    const ref=useRef(null)
+    const ref = useRef(null)
 
-    useEffect(()=>{
+    useEffect(() => {
 
-        function handleClick(e){
+        function handleClick(e) {
 
-            if(ref.current && !ref.current.contains(e.target)){
+            if (ref.current && !ref.current.contains(e.target)) {
                 setShowMenu(false)
             }
         }
 
 
         document.addEventListener('mousedown', handleClick)
-        return()=>{
+        return () => {
             document.removeEventListener('mousedown', handleClick)
         }
     })
+
+    const renderMenu = () => {
+        return <>
+            <a onClick={() => {
+                setScene(0)
+                setShowMenu(false)
+            }} className="flex cursor-pointer px-6 py-2 hover:text-black">
+                Home
+            </a>
+            <a onClick={() => {
+                setScene(1)
+                setShowMenu(false)
+            }} className="flex cursor-pointer px-6 py-2 hover:text-black">
+                Services
+            </a>
+            <a onClick={() => {
+                setScene(2)
+                setShowMenu(false)
+            }} className="flex cursor-pointer px-6 py-2 hover:text-black">
+                Contact
+            </a>
+        </>
+    }
 
     return (
         <>
@@ -30,26 +53,9 @@ export default function Header({ scene, setScene }) {
 
                     <div className="flex items-center z-10">
                         <nav className="items-center hidden text-lg text-gray-800 uppercase font-sen dark:text-white lg:flex">
-                            <a onClick={() => {
-                                setScene(0)
-                            }}  className="flex px-6 py-2 hover:text-black">
-                                Home
-                            </a>
-                            {/* <a onClick={() => {
-                                setScene(1)
-                            }}  className="flex px-6 py-2 hover:text-black">
-                                Works
-                            </a> */}
-                            <a onClick={() => {
-                                setScene(1)
-                            }} className="flex px-6 py-2 hover:text-black">
-                                Services
-                            </a>
-                            <a onClick={() => {
-                                setScene(2)
-                            }} className="flex px-6 py-2 hover:text-black">
-                                Contact
-                            </a>
+                            {
+                                renderMenu()
+                            }
                         </nav>
                         <button onClick={() => {
                             setShowMenu(showMenu ? false : true)
@@ -67,30 +73,9 @@ export default function Header({ scene, setScene }) {
                                 <div className="absolute  right-0 w-56 mt-4 origin-top-right bg-white rounded-md shadow-lg dark:bg-gray-800 ring-1 ring-black ring-opacity-5">
                                     <div ref={ref} className="py-1 " role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                                         <nav className="z-1000 items-center text-lg text-gray-800 uppercase font-sen dark:text-white lg:flex">
-                                            <a onClick={() => {
-                                                setScene(0)
-                                                setShowMenu(false)
-                                            }}  className="flex px-6 py-2 hover:text-black">
-                                                Home
-                                            </a>
-                                            {/* <a onClick={() => {
-                                                setScene(1)
-                                                setShowMenu(false)
-                                            }} href="#" className="flex px-6 py-2 hover:text-black">
-                                                Works
-                                            </a> */}
-                                            <a onClick={() => {
-                                                setScene(1)
-                                                setShowMenu(false)
-                                            }}  className="flex px-6 py-2 hover:text-black">
-                                                Services
-                                            </a>
-                                            <a onClick={() => {
-                                                setScene(2)
-                                                setShowMenu(false)
-                                            }} className="flex px-6 py-2 hover:text-black">
-                                                Contact
-                                            </a>
+                                            {
+                                                renderMenu()
+                                            }
                                         </nav>
                                     </div>
                                 </div>
