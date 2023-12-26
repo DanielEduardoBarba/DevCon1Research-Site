@@ -1,9 +1,11 @@
+import SpinnerSVG from "../assets/SpinnerSVG"
 import config from "../config.json"
 import { useState } from "react"
 
 export default function Contact() {
     const [servRes, setServRes] = useState("")
     const [error, setError] = useState("")
+    const [isSent, setIsSent] = useState(false)
 
     const handleContact = (e) => {
         e.preventDefault()
@@ -35,6 +37,13 @@ export default function Contact() {
             return
         }
 
+        if (isSent) return
+        setIsSent(true)
+        document.getElementById("email").style.opacity = 0.5
+        document.getElementById("name").style.opacity = 0.5
+        document.getElementById("comment").style.opacity = 0.5
+
+        // return
         fetch(`${config.api}/contact/form`, {
             method: "POST",
             headers: {
@@ -47,6 +56,7 @@ export default function Contact() {
             return incoming.json()
         }).then(response => {
             console.log("Server responded: ", response)
+            setIsSent(false)
         }).catch(console.error)
     }
 
@@ -57,8 +67,8 @@ export default function Contact() {
                     <div className="w-full h-min overflow-hidden flex items-center justify-center">
 
                         <div className="flex max-w-sm space-x-3 ">
-                            <div className="z-100000 w-full max-w-2xl px-5 py-10 m-auto mt-10 bg-[#ffffffdd] border-2 border-black rounded-lg shadow dark:bg-gray-800">
 
+                            <div className="z-100000 w-full max-w-2xl px-5 py-10 m-auto mt-10 bg-[#ffffffdd] border-2 border-black rounded-lg shadow dark:bg-gray-800">
                                 {
                                     error
                                         ? <div className="mb-6 text-sm font-light text-center text-red-500 dark:text-white">
@@ -102,13 +112,18 @@ export default function Contact() {
                                     }
                                     <div className="col-span-2 text-right">
                                         {
-                                            !servRes
+                                            !servRes && !isSent
                                                 ? <button onClick={(e) => {
                                                     handleContact(e)
                                                 }} className="active:shadow-xl py-2 px-4 shadow-xl bg-red-600 active:bg-indigo-700 active:ring-indigo-500 active:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md active:outline-none active:ring-2 active:ring-offset-2  rounded-lg ">
                                                     Send
                                                 </button>
-                                                : null
+
+                                                : !servRes
+                                                    ? <div className="w-full flex justify-center">
+                                                        <SpinnerSVG w={50} h={50} color={"black"} />
+                                                    </div>
+                                                    : null
                                         }
                                     </div>
                                 </div>
