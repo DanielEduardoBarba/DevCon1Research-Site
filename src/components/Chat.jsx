@@ -16,6 +16,7 @@ export default function Chat({scene, setScene }) {
     return (
         <div onClick={() => setHideBeacon(true)} style={{
             backgroundColor: !hideBeacon ? "pink" : "",
+            width:hideBeacon?0:""
         }} className="absolute bottom-0 left-0 overflow-hidden duration-1000 pr-8 pt-8 linear rounded-tr-full">
 
             <div className="relative w-full h-full">

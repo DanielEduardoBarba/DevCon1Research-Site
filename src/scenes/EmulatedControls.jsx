@@ -11,16 +11,21 @@ export default function EmulatedControls() {
     const timeGap = 30
     const smallestGap = 2
     useEffect(() => {
-
+        clearInterval(intervalID.current)
         const delay = timeGap - (Math.abs(steer) * timeGap)
 
         console.log("Stereing:", steer)
         console.log("Int:", delay)
         if (steer == 0) return
         else if (steer < 0) {
-            stammerLeft(delay)
+            intervalID.current = setInterval(() => {
+                holdKey("ArrowLeft")
+                setTimeout(() => {
+                    releaseKey("ArrowLeft")
+                    releaseKey("ArrowRight")
+                }, smallestGap + 2)
+            }, delay > smallestGap ? delay : smallestGap)
         } else if (steer > 0) {
-
             intervalID.current = setInterval(() => {
                 holdKey("ArrowRight")
                 setTimeout(() => {
@@ -31,18 +36,6 @@ export default function EmulatedControls() {
         }
 
     }, [steer])
-
-    function stammerLeft(delay) {
-        clearInterval(intervalID.current)
-        if (steer == 0) return
-        intervalID.current = setTimeout(async () => {
-            holdKey("ArrowLeft")
-            await delay(smallestGap + 2)
-            releaseKey("ArrowLeft")
-            releaseKey("ArrowRight")
-            stammerLeft(delay)
-        }, delay > smallestGap ? delay : smallestGap)
-    }
 
 
 
@@ -62,28 +55,34 @@ export default function EmulatedControls() {
         <div className="relative h-full w-screen flex-col items-center ">
             <div className="absolute bottom-0 w-screen flex flex-col-reverse lg:flex-row  justify-between">
 
-                <Steering w={300} h={300}
-                    turnFx={setSteer} />
+                <div className="relative z-0 w-min h-min ">
+                    <Steering w={300} h={300}
+                        turnFx={setSteer} />
+                    <div onClick={()=>setSteer(0)} className="absolute bottom-0 w-full flex flex-row justify-between">
+                        <button
+                            onTouchStart={() => holdKey("ArrowLeft")}
+                            onTouchEnd={() => releaseKey("ArrowLeft")}
+                            onMouseDown={() => holdKey("ArrowLeft")}
+                            onMouseUp={() => releaseKey("ArrowLeft")}
+                            className="default-btn">
+                            Left
+                        </button>
+                        <button
+                            onTouchStart={() => holdKey("ArrowRight")}
+                            onTouchEnd={() => releaseKey("ArrowRight")}
+                            onMouseDown={() => holdKey("ArrowRight")}
+                            onMouseUp={() => releaseKey("ArrowRight")}
+                            className="default-btn">
+                            Right
+                        </button>
+                    </div>
+                </div>
+
 
 
                 <div className="w-full flex flex-row justify-end pr-4 lg:pr-9">
 
-                    {/* <button
-                        onTouchStart={() => holdKey("ArrowLeft")}
-                        onTouchEnd={() => releaseKey("ArrowLeft")}
-                        onMouseDown={() => holdKey("ArrowLeft")}
-                        onMouseUp={() => releaseKey("ArrowLeft")}
-                        className="default-btn">
-                        Left
-                    </button>
-                    <button
-                        onTouchStart={() => holdKey("ArrowRight")}
-                        onTouchEnd={() => releaseKey("ArrowRight")}
-                        onMouseDown={() => holdKey("ArrowRight")}
-                        onMouseUp={() => releaseKey("ArrowRight")}
-                        className="default-btn">
-                        Right
-                    </button> */}
+
                     <Pedals h={150} brakeFx={() => {
                         releaseKey("ArrowUp")
                     }} accelFx={() => {

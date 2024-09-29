@@ -10,7 +10,7 @@ export default function Home({setScene, color}) {
                     </h2>
                     <p style={{
                         color:color
-                    }}className="max-w-3xl py-2 mx-auto text-3xl lg:text-5xl font-bold text-center text-gray-800 md:text-6xl ">
+                    }}className="max-w-3xl py-2 ml-8 mx-auto text-3xl lg:text-5xl font-bold text-center text-gray-800 md:text-6xl ">
                         Software, IT, and Embedded Solutions
                     </p>
                     <div className="flex items-center justify-center mt-4">
