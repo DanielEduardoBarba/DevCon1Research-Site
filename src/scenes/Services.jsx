@@ -8,26 +8,17 @@ export default function Services() {
         setInterval(() => {
 
             const i = Math.floor(Math.random() * services.length)
-            document.getElementById(i).style.opacity = 1
-            document.getElementById(i).style.scale = 1.1
+            const element= document.getElementById(i)
+            if(!element)return
+            element.style.opacity = 1
+            element.style.scale = 1.1
             setTimeout(() => {
-                document.getElementById(i).style.opacity = 0.2
-                document.getElementById(i).style.scale = 1
+                element.style.opacity = 0.2
+                element.style.scale = 1
             }, 500)
         }, 700)
     }, [])
 
-
-    function renderServices() {
-        const elements = []
-        for (let i = 0; i < services.length; i++) {
-            // console.log(services[i])
-            const el = <a className="w-[40px] sm:w-[60px] duration-1000 ease opacity-[.1]" id={i} target="_blank" rel="noreferrer"> 
-            <img className=""   src={services[i]} /> </a>
-            elements.push(el)
-        }
-        return elements
-    }
 
     const services = [
         "https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg"
@@ -58,22 +49,34 @@ export default function Services() {
 
 
 
+    function renderServices() {
+        const elements = []
+        for (let i = 0; i < services.length; i++) {
+            // console.log(services[i])
+            const el = <a key={i} id={i} target="_blank" rel="noreferrer"
+            className="w-[50px] sm:w-[100px] duration-1000 ease opacity-[.1]" > 
+            <img className="" src={services[i]} />
+             </a>
+            elements.push(el)
+        }
+        return elements
+    }
 
-    return (
-        <>
-            <div className="flex flex-col w-full items-center justify-between px-6 py-4 mx-auto">
+
+    return ( 
+            <div  className="flex flex-col w-full items-center justify-between px-6 py-4 mx-auto">
                 {/* <Spline scene="https://prod.spline.design/lpTp8Ng8HpwtBM7m/scene.splinecode" className=" z-0 w-full h-full" /> */}
                 <div className="flex w-screen overflow-hidden flex-col items-center justify-center align-center">
-                    <h2 className="my-6 p-1 text-3xl text-center dark:text-white">
+                    <h2 className="my-6 p-1 text-3xl text-center ">
                         Full Stack Software and Embedded Development!
                     </h2>
-                    <p className="max-w-3xl py-2 mx-auto text-2xl font-bold text-center text-gray-800 md:text-6xl dark:text-white">
+                    <p className="max-w-3xl py-2 mx-auto text-2xl font-bold text-center text-gray-800 md:text-6xl ">
                         We use the same tech as Silicon Valley!
                     </p>
 
 
-                    <div className="absolute w-full h-full flex justify-center items-center align-center z-[-300]">
-                        <div className="flex grid grid-cols-4 xl:grid-cols-6 gap-10 sm:gap-12">
+                    <div className=" w-full h-full flex justify-center items-center align-center z-[-300]">
+                        <div className=" w-ful h-full flex grid grid-cols-4 xl:grid-cols-6 gap-10 sm:gap-12 border-2 border-green-500">
                             {
                                 renderServices()
                             }
@@ -90,7 +93,7 @@ export default function Services() {
 
                 </div>
             </div>
-        </>
+        
     )
 }
 

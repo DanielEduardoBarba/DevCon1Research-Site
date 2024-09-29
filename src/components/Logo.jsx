@@ -1,11 +1,13 @@
 import devCon1 from "../assets/devcon1-logo.png"
 
-export default function Logo(){
+export default function Logo({ w, h }) {
+    return (
 
-    return(
-        <>
+        <img src={devCon1}
+            style={{
+                width: w ? w : "",
+                height: h ? h : ""
+            }} className="z-0 bg-black rounded-[5px] lg:rounded-[10px]" />
 
-        <img src={devCon1} className="absolute z-0 bg-black top-0 left-0 rounded-[5px] lg:rounded-[10px] w-1/2 sm:w-1/4 m-2 md:m-6" />
-        </>
     )
 }
