@@ -43,7 +43,7 @@ export default function App() {
     goToScene(user.scene)
     setPageWidth(window.innerWidth)
 
-    setTimeout(() => setLoadRest(true), 3000)
+    setTimeout(() => setLoadRest(true), 7000)
     window.addEventListener("resize", handleResize)
     return () => {
       window.removeEventListener("resize", handleResize)
