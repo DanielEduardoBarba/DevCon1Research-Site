@@ -64,15 +64,23 @@ export default function Services() {
 
 
     return ( 
-            <div  className="flex flex-col w-full items-center justify-between px-6 py-4 mx-auto">
-                {/* <Spline scene="https://prod.spline.design/lpTp8Ng8HpwtBM7m/scene.splinecode" className=" z-0 w-full h-full" /> */}
-                <div className="flex w-screen overflow-hidden flex-col items-center justify-center align-center">
+            <div className="h-full w-screen overflow-scroll border-4 border-purple-500 ">
+   
+                <div className="flex flex-col items-center justify-center align-center border-2 border-black">
                     <h2 className="my-6 p-1 text-3xl text-center ">
                         Full Stack Software and Embedded Development!
                     </h2>
                     <p className="max-w-3xl py-2 mx-auto text-2xl font-bold text-center text-gray-800 md:text-6xl ">
                         We use the same tech as Silicon Valley!
                     </p>
+
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
 
 
                     <div className=" w-full h-full flex justify-center items-center align-center z-[-300]">

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 
-
-export default function Chat({ setScene }) {
+export default function Chat({scene, setScene }) {
     const [hideBeacon, setHideBeacon] = useState(true)
     const screenWidth = window.innerWidth
 
@@ -10,6 +9,10 @@ export default function Chat({ setScene }) {
             setHideBeacon(false)
         }, 2000)
     }, [])
+
+    useEffect(() => {
+        if(scene)setHideBeacon(true)
+    }, [scene])
     return (
         <div onClick={() => setHideBeacon(true)} style={{
             backgroundColor: !hideBeacon ? "pink" : "",

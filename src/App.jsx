@@ -21,7 +21,7 @@ export default function App() {
     useRef(null),
     useRef(null)
   ]
-  const timeoutIDs=[
+  const timeoutIDs = [
     useRef(null),
     useRef(null),
     useRef(null)
@@ -29,16 +29,16 @@ export default function App() {
   useEffect(() => {
     setPageWidth(window.innerWidth)
 
-    window.addEventListener("resize", handleResize) 
+    window.addEventListener("resize", handleResize)
     return () => {
-      window.removeEventListener("resize", handleResize) 
+      window.removeEventListener("resize", handleResize)
     }
   }, [])
   function handleResize() {
     setPageWidth(window.innerWidth)
   }
 
- 
+
   const [scrollPosition, setScrollPosition] = useState(0)
   useEffect(() => {
     if (goTo != null) {
@@ -52,29 +52,23 @@ export default function App() {
   useEffect(() => {
     waitAndMoveScroll()
   }, [scrollPosition])
-  const waitAndMoveScroll=()=>{
+  const waitAndMoveScroll = () => {
     // console.log("WAIT then change")
     // console.log("scrollPosition", scrollPosition)
-    const closestScene=closestDivider(scrollPosition, 0,pageWidth*2, pageWidth)
+    const closestScene = closestDivider(scrollPosition)
+    focusValue(0,scrollPosition)
     console.log("closestScene", closestScene)
     handleSceneChange(closestScene)
-  }
-  const getAndMoveScroll=()=>{
-    // console.log("IMMEDIATE change")
-    // console.log("scrollPosition", scrollPosition)
-    const closestScene=closestDivider(scrollPosition, 0,pageWidth*2, pageWidth)
-    // console.log("closestScene", closestScene)
-    // handleSceneChange(closestScene)
-  }
+  } 
 
   const handleSceneChange = (_scene) => {
     clearTimeout(timeoutIDs[0].current)
-    timeoutIDs[0].current=setTimeout(()=>{
+    timeoutIDs[0].current = setTimeout(() => {
       goToScene(_scene)
-    },100) 
+    }, 100)
   }
 
-  const goToScene=(_scene)=>{
+  const goToScene = (_scene) => {
     setScene(_scene)
     sceneRef[_scene].current.scrollIntoView({ behavior: 'smooth' })
   }
@@ -82,21 +76,59 @@ export default function App() {
     setScrollPosition(event.target.scrollLeft)
   }
 
-  function closestDivider(num, start, end, divider) {
-    if(!end)return 0
+  function closestDivider(pos) {
+    const end= pageWidth * (appScenes.length-1) 
+    if (!end) return 0
     // Generate the list of divider points
     const dividers = []
-    for (let i = start; i <= end; i += divider) {
-        dividers.push(i)
+    for (let i = 0; i <= end; i += pageWidth) {
+      dividers.push(i)
     }
 
     // Find the closest divider
     const closest = dividers.reduce((prev, curr) => {
-        return (Math.abs(curr - num) < Math.abs(prev - num) ? curr : prev);
+      return (Math.abs(curr - pos) < Math.abs(prev - pos) ? curr : prev);
     })
 
     return dividers.indexOf(closest)
-}
+  }
+  
+
+  function focusValue(i,pos) {
+    const end= pageWidth * (appScenes.length-1) 
+    if (!end) return 0
+    // Generate the list of divider points
+    const dividers = []
+    for (let i = 0; i <= end; i += pageWidth) {
+      dividers.push(i)
+    }
+
+    // Find the closest divider
+    const closest = dividers.reduce((prev, curr) => {
+      return (Math.abs(curr - pos) < Math.abs(prev - pos) ? curr : prev);
+    })
+
+    const opacity=closest-pos
+    console.log("opacity",opacity)
+    return  
+  }
+
+
+  const appScenes = [
+    <Home setScene={setScene} />,
+    <Services />,
+    <Contact />
+  ]
+
+  function renderApp() { 
+    return appScenes.map((app, i) => <div
+      ref={sceneRef[i]} key={i}
+      className="w-screen border-2 border-orange-400">
+      {app}
+    </div>)
+  }
+
+
   return (
     <main className="app-container relative h-screen flex flex-col overflow-hidden font-mono bg-white border-2 border-purple-500 ">
       <Spline style={{
@@ -112,23 +144,15 @@ export default function App() {
       <Header scene={scene} setScene={setScene} />
 
       <div ref={mainRef}
-      onScroll={handleScroll} 
-      style={{
-        //  transform: scene?`translateX(-${pageWidth*scene}px)`:"",
-        //  transition:"transform 3s ease"
-      }} className=" h-full flex w-screen  z-0 overflow-scroll border-2 border-green-500">
-        <div ref={sceneRef[0]}>
-          <Home setScene={setScene} />
-        </div>
-        <div ref={sceneRef[1]}>
-          <Services />
-        </div>
-        <div ref={sceneRef[2]}>
-          <Contact />
-        </div>
+        onScroll={handleScroll}
+        style={{
+          //  transform: scene?`translateX(-${pageWidth*scene}px)`:"",
+          //  transition:"transform 3s ease"
+        }} className="h-full flex w-screen z-0 overflow-y-hidden overflow-x-scroll border-4 border-red-500">
+        {renderApp()}
       </div>
 
-      <Chat setScene={setScene} />
+      <Chat scene={scene} setScene={setScene} />
       <Footer />
 
     </main>
