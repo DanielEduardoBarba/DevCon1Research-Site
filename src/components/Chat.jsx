@@ -1,7 +1,10 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import AppContext from "../AppContext"
 
-export default function Chat({scene, setScene }) {
+export default function Chat() {
     const [hideBeacon, setHideBeacon] = useState(true)
+    const {scene, setScene }=useContext(AppContext)
+
     const screenWidth = window.innerWidth
 
     useEffect(() => {

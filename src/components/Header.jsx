@@ -1,9 +1,11 @@
-import { useEffect, useRef, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import Logo from "./Logo"
+import AppContext from "../AppContext"
 
 
-export default function Header({ scene, setScene }) {
+export default function Header() {
     const [showMenu, setShowMenu] = useState(false)
+    const{scene, goToScene}=useContext(AppContext)
     const ref = useRef(null)
 
     useEffect(() => {
@@ -30,7 +32,7 @@ export default function Header({ scene, setScene }) {
 
     const renderMenu = () => {
         return options.map((opt, i) => <a key={i} onClick={() => {
-            setScene(i)
+            goToScene(i)
             setShowMenu(false)
         }} style={{
             backgroundColor: scene == i ? "#cccccc" : "transparent", 

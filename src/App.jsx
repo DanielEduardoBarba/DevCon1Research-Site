@@ -15,11 +15,11 @@ const defaultUser = {
   scene: 0
 }
 export default function App() {
-  const [lockScroll, setLockScroll]=useState(false)
+  const [lockScroll, setLockScroll] = useState(false)
   const [user, setUser] = useState(defaultUser)
   const [scene, setScene] = useState(0)
   const lsAppName = "devConUser"
-
+  const [loadRest, setLoadRest] = useState(false)
   const [scrollPos, setScrollPos] = useState(0)
   const [pageWidth, setPageWidth] = useState(0)
 
@@ -40,8 +40,10 @@ export default function App() {
   ]
   useEffect(() => {
     getUser()
-    setScene(user.scene)
+    goToScene(user.scene)
     setPageWidth(window.innerWidth)
+
+    setTimeout(() => setLoadRest(true), 3000)
     window.addEventListener("resize", handleResize)
     return () => {
       window.removeEventListener("resize", handleResize)
@@ -52,15 +54,15 @@ export default function App() {
   function saveUser(_user) {
     localStorage.setItem(lsAppName, JSON.stringify(_user))
     setUser(_user)
-    console.log("Saved User->",_user)
+    console.log("Saved User->", _user)
   }
   function getUser() {
     const _u = localStorage.getItem(lsAppName)
     try {
       console.log("Found User->", user)
       if (_u) setUser(JSON.parse(_u))
-    } catch(err){
-  console.log("Error occurred getUser()", err)
+    } catch (err) {
+      console.log("Error occurred getUser()", err)
       // saveUser(defaultUser)
     }
   }
@@ -89,10 +91,14 @@ export default function App() {
   }
 
   const goToScene = (_scene) => {
-    setScene(_scene)
-    sceneRef[_scene].current.scrollIntoView({ behavior: 'smooth' })
-    user.scene=_scene
-    saveUser(user)
+    if (_scene != scene) {
+      setScene(_scene)
+      sceneRef[_scene].current.scrollIntoView({ behavior: 'smooth' })
+      user.scene = _scene
+      saveUser(user)
+      setLoadRest(true)
+    }
+
   }
 
   const handleScroll = (event) => {
@@ -142,50 +148,49 @@ export default function App() {
       {app}
     </div>)
   }
-  async function delay(ts){
-    return new Promise((resolve,reject)=> setTimeout(()=>resolve(),ts))
-}
+  async function delay(ts) {
+    return new Promise((resolve, reject) => setTimeout(() => resolve(), ts))
+  }
   return (
     <AppContext.Provider value={{
       user, saveUser,
+      goToScene,
       setLockScroll,
       delay
     }}>
       <main style={{
-      height:"100svh"
+        height: "100svh"
       }} className="relative flex flex-col overflow-hidden font-mono bg-black  ">
-        {/* <div style={{
-          opacity: focusValue(0)
-        }} className=" absolute w-full h-full">
-
-        <Spline scene={"https://prod.spline.design/RZzHVB2S0AGzU9bg/scene.splinecode"}
-          className="absolute w-full h-full" />
-          <div className="absolute w-[170px] h-[10%] right-0 bottom-0 rounded-tl-xl bg-black"/>
-        </div> */}
         <Spline style={{
           opacity: focusValue(0)
-        }}scene={"https://prod.spline.design/RZzHVB2S0AGzU9bg/scene.splinecode"}
+        }} scene={"https://prod.spline.design/RZzHVB2S0AGzU9bg/scene.splinecode"}
           className="absolute w-full h-full" />
+        {
+          loadRest
+            ? <>
 
-        <Spline style={{
-          opacity: focusValue(2)
-        }} scene={"https://prod.spline.design/A1i-MMZ2Ie1NTvif/scene.splinecode"}
-          className="absolute z-0 w-full h-full" />
+              <Spline style={{
+                opacity: focusValue(2)
+              }} scene={"https://prod.spline.design/A1i-MMZ2Ie1NTvif/scene.splinecode"}
+                className="absolute z-0 w-full h-full" />
+            </>
+            : null
+        }
 
 
 
-        <Header scene={scene} setScene={setScene} />
+        <Header  />
 
         <div ref={mainRef}
           onScroll={handleScroll}
           style={{
             //  transform: scene?`translateX(-${pageWidth*scene}px)`:"",
             //  transition:"transform 3s ease"
-          }} className={`h-full flex w-screen z-0 overflow-y-hidden ${lockScroll?"overflow-x-hidden":"overflow-x-scroll"}`}>
+          }} className={`h-full flex w-screen z-0 overflow-y-hidden ${lockScroll ? "overflow-x-hidden" : "overflow-x-scroll"}`}>
           {renderApp()}
         </div>
 
-        <Chat scene={scene} setScene={setScene} />
+        <Chat  />
         <Footer />
 
       </main>
