@@ -24,7 +24,7 @@ export default function Header({ scene, setScene }) {
     const options = [
         "Home",
         "Services",
-        "Examples",
+        "Demo",
         "Contact"
     ]
 
@@ -35,7 +35,7 @@ export default function Header({ scene, setScene }) {
         }} style={{
             backgroundColor: scene == i ? "#cccccc" : "transparent", 
             color: scene == i ? "black" : "white", 
-            textShadow:"1px 1px 5px black"
+            textShadow:scene != i?"1px 1px 5px black":""
         }} className="default-btn flex px-6 py-2 mx-2 border-2 cursor-pointer hover:border-2 border-transparent hover:border-red-500 rounded-xl">
             {opt}
         </a>)
@@ -50,7 +50,7 @@ export default function Header({ scene, setScene }) {
 
 
             <div className="flex items-center z-10">
-                <nav className="items-center text-lg text-gray-800 uppercase hidden lg:block lg:flex">
+                <nav className="items-center  text-lg text-gray-800 uppercase hidden lg:block lg:flex">
                     {
                         renderMenu()
                     }
@@ -68,9 +68,9 @@ export default function Header({ scene, setScene }) {
                 {showMenu
                     ?
                     <div className="z-10 relative  inline-block text-left lg:hidden">
-                        <div className="absolute  right-0 w-56 mt-8 mr-4 origin-top-right bg-white rounded-md shadow-lg">
-                            <div ref={ref} className="py-1 " role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                                <nav className="z-1000 items-center text-lg text-gray-800 uppercase font-sen  lg:flex">
+                        <div className="absolute  right-0 w-56 mt-8 mr-4 origin-top-right bg-white rounded-2xl shadow-lg">
+                            <div ref={ref} className="py-1" >
+                                <nav className="z-1000 items-center text-lg text-gray-800  lg:flex">
                                     {
                                         renderMenu()
                                     }

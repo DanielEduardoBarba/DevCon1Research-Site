@@ -138,7 +138,7 @@ export default function App() {
       style={{
         opacity: focusValue(i),
         width: "100vw"
-      }} className="w-screen border-2 border-orange-400">
+      }} className="w-screen">
       {app}
     </div>)
   }
@@ -153,7 +153,7 @@ export default function App() {
     }}>
       <main style={{
       height:"100svh"
-      }} className="relative flex flex-col overflow-hidden font-mono bg-black border-2 border-purple-500 ">
+      }} className="relative flex flex-col overflow-hidden font-mono bg-black  ">
         {/* <div style={{
           opacity: focusValue(0)
         }} className=" absolute w-full h-full">
@@ -181,7 +181,7 @@ export default function App() {
           style={{
             //  transform: scene?`translateX(-${pageWidth*scene}px)`:"",
             //  transition:"transform 3s ease"
-          }} className={`h-full flex w-screen z-0 overflow-y-hidden ${lockScroll?"overflow-x-hidden":"overflow-x-scroll"} border-4 border-red-500`}>
+          }} className={`h-full flex w-screen z-0 overflow-y-hidden ${lockScroll?"overflow-x-hidden":"overflow-x-scroll"}`}>
           {renderApp()}
         </div>
 
