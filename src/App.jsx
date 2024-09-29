@@ -9,16 +9,19 @@ import Footer from "./components/Footer"
 import './App.css'
 import EmulatedKeys from './scenes/EmulatedControls'
 import AppContext from './AppContext'
+import LoadingPage from './components/LoadingPage'
 
 
 const defaultUser = {
-  scene: 0
 }
-export default function App() {
+export default function App({routeScene=0}) {
   const [lockScroll, setLockScroll] = useState(false)
   const [user, setUser] = useState(defaultUser)
   const [scene, setScene] = useState(0)
+
   const lsAppName = "devConUser"
+
+  const[isLoading, setIsLoading]=useState(true)
   const [loadRest, setLoadRest] = useState(false)
   const [scrollPos, setScrollPos] = useState(0)
   const [pageWidth, setPageWidth] = useState(0)
@@ -40,7 +43,7 @@ export default function App() {
   ]
   useEffect(() => {
     getUser()
-    goToScene(user.scene)
+    goToScene(routeScene)
     setPageWidth(window.innerWidth)
 
     setTimeout(() => setLoadRest(true), 7000)
@@ -158,9 +161,19 @@ export default function App() {
       setLockScroll,
       delay
     }}>
-      <main style={{
+      <main onLoad={()=>{
+        setTimeout(()=>{
+          setIsLoading(false)
+          
+        },1000)
+      }} style={{
         height: "100svh"
       }} className="relative flex flex-col overflow-hidden font-mono bg-black  ">
+        {
+          isLoading 
+          ?<LoadingPage/>
+          :null
+        }
         <Spline style={{
           opacity: focusValue(0)
         }} scene={"https://prod.spline.design/RZzHVB2S0AGzU9bg/scene.splinecode"}
