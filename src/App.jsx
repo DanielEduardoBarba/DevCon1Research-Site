@@ -7,16 +7,25 @@ import Contact from './scenes/Contact'
 import Chat from "./components/Chat"
 import Footer from "./components/Footer"
 import './App.css'
+import EmulatedKeys from './scenes/EmulatedControls'
+import AppContext from './AppContext'
 
+
+const defaultUser = {
+  scene: 0
+}
 export default function App() {
-
+  const [user, setUser] = useState(defaultUser)
   const [scene, setScene] = useState(0)
-  const [pageWidth, setPageWidth] = useState(0)
+  const lsAppName = "devConUser"
 
-  const [goTo, setGoTo] = useState(null)
+  const [scrollPos, setScrollPos] = useState(0)
+  const [pageWidth, setPageWidth] = useState(0)
 
   const mainRef = useRef(null)
   const sceneRef = [
+    useRef(null),
+    useRef(null),
     useRef(null),
     useRef(null),
     useRef(null)
@@ -24,42 +33,52 @@ export default function App() {
   const timeoutIDs = [
     useRef(null),
     useRef(null),
+    useRef(null),
+    useRef(null),
     useRef(null)
   ]
   useEffect(() => {
+    getUser()
+    setScene(user.scene)
     setPageWidth(window.innerWidth)
-
     window.addEventListener("resize", handleResize)
     return () => {
       window.removeEventListener("resize", handleResize)
     }
   }, [])
+
+
+  function saveUser(_user) {
+    localStorage.setItem(lsAppName, JSON.stringify(_user))
+    setUser(_user)
+    console.log("Saved User->",_user)
+  }
+  function getUser() {
+    const _u = localStorage.getItem(lsAppName)
+    try {
+      console.log("Found User->", user)
+      if (_u) setUser(JSON.parse(_u))
+    } catch(err){
+  console.log("Error occurred getUser()", err)
+      // saveUser(defaultUser)
+    }
+  }
+
   function handleResize() {
     setPageWidth(window.innerWidth)
   }
-
-
-  const [scrollPosition, setScrollPosition] = useState(0)
-  useEffect(() => {
-    if (goTo != null) {
-
-    }
-  }, [goTo])
-
   useEffect(() => {
     goToScene(scene)
   }, [scene])
+
   useEffect(() => {
     waitAndMoveScroll()
-  }, [scrollPosition])
+  }, [scrollPos])
+
   const waitAndMoveScroll = () => {
-    // console.log("WAIT then change")
-    // console.log("scrollPosition", scrollPosition)
-    const closestScene = closestDivider(scrollPosition)
-    focusValue(0,scrollPosition)
-    console.log("closestScene", closestScene)
+    const closestScene = closestDivider(scrollPos)
     handleSceneChange(closestScene)
-  } 
+  }
 
   const handleSceneChange = (_scene) => {
     clearTimeout(timeoutIDs[0].current)
@@ -71,13 +90,16 @@ export default function App() {
   const goToScene = (_scene) => {
     setScene(_scene)
     sceneRef[_scene].current.scrollIntoView({ behavior: 'smooth' })
-  }
-  const handleScroll = (event) => {
-    setScrollPosition(event.target.scrollLeft)
+    // user.scene=_scene
+    // saveUser(user)
   }
 
-  function closestDivider(pos) {
-    const end= pageWidth * (appScenes.length-1) 
+  const handleScroll = (event) => {
+    setScrollPos(event.target.scrollLeft)
+  }
+
+  function closestDivider() {
+    const end = pageWidth * (appScenes.length - 1)
     if (!end) return 0
     // Generate the list of divider points
     const dividers = []
@@ -87,76 +109,79 @@ export default function App() {
 
     // Find the closest divider
     const closest = dividers.reduce((prev, curr) => {
-      return (Math.abs(curr - pos) < Math.abs(prev - pos) ? curr : prev);
+      return (Math.abs(curr - scrollPos) < Math.abs(prev - scrollPos) ? curr : prev);
     })
 
     return dividers.indexOf(closest)
   }
-  
 
-  function focusValue(i,pos) {
-    const end= pageWidth * (appScenes.length-1) 
-    if (!end) return 0
-    // Generate the list of divider points
-    const dividers = []
-    for (let i = 0; i <= end; i += pageWidth) {
-      dividers.push(i)
-    }
-
-    // Find the closest divider
-    const closest = dividers.reduce((prev, curr) => {
-      return (Math.abs(curr - pos) < Math.abs(prev - pos) ? curr : prev);
-    })
-
-    const opacity=closest-pos
-    console.log("opacity",opacity)
-    return  
+  function focusValue(i = 0, multiplier = 1) {
+    const iPos = scrollPos / pageWidth
+    const opacity = 1 + (Math.abs(iPos - i) * -1)
+    // console.log("iPos", iPos)
+    // console.log("opacity", opacity)
+    return opacity > 0 ? opacity * multiplier : 0
   }
 
 
   const appScenes = [
-    <Home setScene={setScene} />,
+    <Home setScene={setScene} color={"white"} />,
     <Services />,
+    <EmulatedKeys />,
     <Contact />
   ]
 
-  function renderApp() { 
+  function renderApp() {
     return appScenes.map((app, i) => <div
       ref={sceneRef[i]} key={i}
-      className="w-screen border-2 border-orange-400">
+      style={{
+        opacity: focusValue(i),
+        width: "100vw"
+      }} className=" border-2 border-orange-400">
       {app}
     </div>)
   }
-
-
   return (
-    <main className="app-container relative h-screen flex flex-col overflow-hidden font-mono bg-white border-2 border-purple-500 ">
-      <Spline style={{
-        opacity: scene == 0 ? 1 : 0
-      }} scene={"https://prod.spline.design/dNQ123nn0WoNdmt8/scene.splinecode"}
-        className="absolute duration-1000 ease z-0 w-full h-full" />
-      <Spline style={{
-        opacity: scene == 2 ? 1 : 0
-      }} scene={"https://prod.spline.design/lpTp8Ng8HpwtBM7m/scene.splinecode"}
-        className="absolute duration-1000 ease z-0 w-full h-full" />
+    <AppContext.Provider value={{
+      user, saveUser
+    }}>
+      <main className="relative h-screen flex flex-col overflow-hidden font-mono bg-black border-2 border-purple-500 ">
+        {/* <div style={{
+          opacity: focusValue(0)
+        }} className=" absolute w-full h-full">
+
+        <Spline scene={"https://prod.spline.design/RZzHVB2S0AGzU9bg/scene.splinecode"}
+          className="absolute w-full h-full" />
+          <div className="absolute w-[170px] h-[10%] right-0 bottom-0 rounded-tl-xl bg-black"/>
+        </div> */}
+        <Spline style={{
+          opacity: focusValue(0)
+        }}scene={"https://prod.spline.design/RZzHVB2S0AGzU9bg/scene.splinecode"}
+          className="absolute w-full h-full" />
+
+        <Spline style={{
+          opacity: focusValue(2)
+        }} scene={"https://prod.spline.design/A1i-MMZ2Ie1NTvif/scene.splinecode"}
+          className="absolute z-0 w-full h-full" />
 
 
-      <Header scene={scene} setScene={setScene} />
 
-      <div ref={mainRef}
-        onScroll={handleScroll}
-        style={{
-          //  transform: scene?`translateX(-${pageWidth*scene}px)`:"",
-          //  transition:"transform 3s ease"
-        }} className="h-full flex w-screen z-0 overflow-y-hidden overflow-x-scroll border-4 border-red-500">
-        {renderApp()}
-      </div>
+        <Header scene={scene} setScene={setScene} />
 
-      <Chat scene={scene} setScene={setScene} />
-      <Footer />
+        <div ref={mainRef}
+          onScroll={handleScroll}
+          style={{
+            //  transform: scene?`translateX(-${pageWidth*scene}px)`:"",
+            //  transition:"transform 3s ease"
+          }} className="h-full flex w-screen z-0 overflow-y-hidden overflow-x-scroll border-4 border-red-500">
+          {renderApp()}
+        </div>
 
-    </main>
+        <Chat scene={scene} setScene={setScene} />
+        <Footer />
 
+      </main>
+    </AppContext.Provider>
   )
 }
 

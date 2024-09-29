@@ -3,20 +3,32 @@ import { useEffect } from "react"
 
 export default function Services() {
 
+const dispatchPopup=(i)=>{
+    
+    const element= document.getElementById(i)
+    if(!element)return
+    element.style.opacity = 1
+    element.style.scale = 1.1
+    setTimeout(() => {
+        element.style.opacity = 0.2
+        element.style.scale = 1
+    }, 500)
+}
 
+const order=[5, 12, 3, 19, 0, 7, 22, 1, 14, 9, 18, 6, 21, 4, 11, 8, 23, 2, 15, 10, 13, 17, 20, 16]
+let i=0
+
+const nextI=()=>{
+    i++
+    if(i>services.length-1)i=0
+    return order[i]
+}
     useEffect(() => {
-        setInterval(() => {
-
-            const i = Math.floor(Math.random() * services.length)
-            const element= document.getElementById(i)
-            if(!element)return
-            element.style.opacity = 1
-            element.style.scale = 1.1
-            setTimeout(() => {
-                element.style.opacity = 0.2
-                element.style.scale = 1
-            }, 500)
-        }, 700)
+        setInterval(() => { 
+           dispatchPopup(nextI()) 
+           dispatchPopup(nextI()) 
+           dispatchPopup(nextI()) 
+        }, 1000)
     }, [])
 
 
@@ -66,12 +78,12 @@ export default function Services() {
     return ( 
             <div className="h-full w-screen overflow-scroll border-4 border-purple-500 ">
    
-                <div className="flex flex-col items-center justify-center align-center border-2 border-black">
-                    <h2 className="my-6 p-1 text-3xl text-center ">
+                <div className="relative flex flex-col items-center justify-center align-center ">
+                    <h2 className="my-6 p-1 text-3xl text-center text-white ">
                         Full Stack Software and Embedded Development!
                     </h2>
-                    <p className="max-w-3xl py-2 mx-auto text-2xl font-bold text-center text-gray-800 md:text-6xl ">
-                        We use the same tech as Silicon Valley!
+                    <p className="max-w-3xl py-2 mx-auto text-2xl font-bold text-center text-white md:text-6xl ">
+                        We are your one stop shop for all things software!
                     </p>
 
                     <br />
@@ -83,8 +95,8 @@ export default function Services() {
                     <br />
 
 
-                    <div className=" w-full h-full flex justify-center items-center align-center z-[-300]">
-                        <div className=" w-ful h-full flex grid grid-cols-4 xl:grid-cols-6 gap-10 sm:gap-12 border-2 border-green-500">
+                    <div className="absolute  w-full h-full flex justify-center items-center align-center z-[-300]">
+                        <div className=" h-full flex grid grid-cols-4 xl:grid-cols-6 gap-10 sm:gap-12 ">
                             {
                                 renderServices()
                             }
