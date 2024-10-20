@@ -1,11 +1,5 @@
 
 
-
-
-
-
-
-
 export default function SpinnerSVG({h, w , color="black"}) {
 
     return (

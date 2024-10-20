@@ -6,22 +6,20 @@ import Services from './scenes/Services'
 import Contact from './scenes/Contact'
 import Chat from "./components/Chat"
 import Footer from "./components/Footer"
-import './App.css'
 import EmulatedKeys from './scenes/EmulatedControls'
 import AppContext from './AppContext'
 import LoadingPage from './components/LoadingPage'
+import './App.css'
 
-
-const defaultUser = {
-}
-export default function App({routeScene=0}) {
+const defaultUser = {}
+export default function App({ routeScene = 0 }) {
   const [lockScroll, setLockScroll] = useState(false)
   const [user, setUser] = useState(defaultUser)
   const [scene, setScene] = useState(0)
 
   const lsAppName = "devConUser"
 
-  const[isLoading, setIsLoading]=useState(true)
+  const [isLoading, setIsLoading] = useState(true)
   const [loadRest, setLoadRest] = useState(false)
   const [scrollPos, setScrollPos] = useState(0)
   const [pageWidth, setPageWidth] = useState(0)
@@ -94,13 +92,13 @@ export default function App({routeScene=0}) {
   }
 
   const goToScene = (_scene) => {
-    if (_scene != scene) {
-      setScene(_scene)
-      sceneRef[_scene].current.scrollIntoView({ behavior: 'smooth' })
-      user.scene = _scene
-      saveUser(user)
-      setLoadRest(true)
-    }
+    // if (_scene != scene) {
+    setScene(_scene)
+    sceneRef[_scene].current.scrollIntoView({ behavior: 'smooth' })
+    // user.scene = _scene
+    // saveUser(user)
+    setLoadRest(true)
+    // }
 
   }
 
@@ -135,7 +133,7 @@ export default function App({routeScene=0}) {
 
 
   const appScenes = [
-    <Home setScene={setScene} color={"white"} />,
+    <Home />,
     <Services />,
     <EmulatedKeys />,
     <Contact />
@@ -157,22 +155,23 @@ export default function App({routeScene=0}) {
   return (
     <AppContext.Provider value={{
       user, saveUser,
+      scene,
+      setScene,
       goToScene,
       setLockScroll,
       delay
     }}>
-      <main onLoad={()=>{
-        setTimeout(()=>{
+      <main onLoad={() => {
+        setTimeout(() => {
           setIsLoading(false)
-          
-        },1000)
+        }, 1000)
       }} style={{
         height: "100svh"
       }} className="relative flex flex-col overflow-hidden font-mono bg-black  ">
         {
-          isLoading 
-          ?<LoadingPage/>
-          :null
+          isLoading
+            ? <LoadingPage />
+            : null
         }
         <Spline style={{
           opacity: focusValue(0)
@@ -180,32 +179,20 @@ export default function App({routeScene=0}) {
           className="absolute w-full h-full" />
         {
           loadRest
-            ? <>
-
-              <Spline style={{
+            ? <Spline style={{
                 opacity: focusValue(2)
               }} scene={"https://prod.spline.design/A1i-MMZ2Ie1NTvif/scene.splinecode"}
                 className="absolute z-0 w-full h-full" />
-            </>
             : null
         }
-
-
-
-        <Header  />
-
+        <Header />
         <div ref={mainRef}
           onScroll={handleScroll}
-          style={{
-            //  transform: scene?`translateX(-${pageWidth*scene}px)`:"",
-            //  transition:"transform 3s ease"
-          }} className={`h-full flex w-screen z-0 overflow-y-hidden ${lockScroll ? "overflow-x-hidden" : "overflow-x-scroll"}`}>
+          className={`h-full flex w-screen z-0 overflow-y-hidden ${lockScroll ? "overflow-x-hidden" : "overflow-x-scroll"}`}>
           {renderApp()}
         </div>
-
-        <Chat  />
+        <Chat />
         <Footer />
-
       </main>
     </AppContext.Provider>
   )

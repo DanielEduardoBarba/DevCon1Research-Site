@@ -9,16 +9,17 @@ const [showFooter,setShowFooter]=useState(true)
         },2000)
     },[])
     return ( 
-            <div onMouseOver={()=>setShowFooter(true)}
-            onMouseLeave={()=>setShowFooter(false)} style={{
+            <div 
+            onMouseOverCapture={()=>setShowFooter(true)}
+            onMouseOver={()=>setShowFooter(true)} style={{
                 opacity:showFooter?1:0
-            }} className="absolute duration-1000 transition-opacity w-[75vw] flex bottom-0 right-0 m-2 items-center justify-between ">
+            }} className="absolute z-[10] duration-1000 transition-opacity w-[100vw] flex bottom-0 right-0 m-2 items-center justify-between ">
                 <p className=" text-xs text-white"></p>
                 <a href="mailto:daniel@devcon1solutions.com">
-                    <p className="hidden lg:block text-xs text-white">
-                        DANIEL@DEVCON1SOLUTIONS.COM
+                    <p className=" text-xs text-white">
+                        daniel@devcon1solutions.com
                     </p></a>
-                <p className="hidden md:block text-white">
+                <p className="hidden md:block text-xs text-white">
                     DevCon1 Solutions LLC, All Rights Reserved
                 </p>
                 <p className=" text-xs text-white">

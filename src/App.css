@@ -5,6 +5,7 @@
  
 
 .default-btn {
+    user-select: none;
     background-color: white;
     padding: 8px;
     padding-inline: 15px;

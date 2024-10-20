@@ -1,18 +1,24 @@
-import { useEffect } from "react"
+import { useEffect, useRef, useState } from "react"
+import ComputerEmojiSVG from "../assets/ComputerEmojiSVG"
+import PhoneEmojiSVG from "../assets/PhoneEmojiSVG"
+import Confetti from "react-confetti"
 
 
 export default function Services() {
-
+    const [celebrate,setCelebrate] = useState(false)
+    const dispatchID = useRef(null)
     const dispatchPopup = (i) => {
 
         const element = document.getElementById(i)
         if (!element) return
-        element.style.opacity = 1
-        element.style.scale = 1.1
+        element.style.opacity = 0.3
+        // element.style.scale = 1.1
+        // element.style.filter = "drop-shadow(0px 0px 10px white)"
         setTimeout(() => {
-            element.style.opacity = 0.2
-            element.style.scale = 1
-        }, 500)
+            element.style.opacity = 0.1
+            // element.style.scale = 1
+            // element.style.filter = ""
+        }, 2000)
     }
 
     const order = [5, 12, 3, 19, 0, 7, 22, 1, 14, 9, 18, 6, 21, 4, 11, 8, 23, 2, 15, 10, 13, 17, 20, 16]
@@ -24,13 +30,19 @@ export default function Services() {
         return order[i]
     }
     useEffect(() => {
-        setInterval(() => {
+        dispatchID.current=setInterval(() => {
+            if(celebrate)return
+            dispatchPopup(nextI())
             dispatchPopup(nextI())
             //    dispatchPopup(nextI()) 
             //    dispatchPopup(nextI()) 
         }, 1000)
     }, [])
-
+    // useEffect(() => {
+    //     if(celebrate){
+    //         clearInterval(dispatchID.current)
+    //     }
+    // }, [celebrate])
 
     const services = [
         "https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg"
@@ -77,44 +89,64 @@ export default function Services() {
 
     return (
         <div className="h-full w-screen overflow-scroll ">
+{
+    celebrate
+    ?<Confetti width={window.innerWidth} hieght={window.innerHeight}  />
+    :null
+}
 
             <div className="relative flex flex-col items-center justify-center align-center ">
-                <h2 className="my-12 p-1 text-3xl text-center text-white ">
+                <h2 className="my-6 p-1 text-2xl text-center text-white ">
                     Truly Full Stack Software Development!
                 </h2>
-                <p className="max-w-3xl py-2 mx-auto text-2xl font-bold text-center text-white md:text-6xl ">
+                <p className="max-w-3xl pb-7 mx-auto text-lg md:text-3xl font-bold text-center text-white  ">
                     We are your one stop shop for all things software!
                 </p>
-
-
-
-
                 <div className="absolute  w-full h-full flex justify-center items-center align-center z-[-300]">
-                    <div className="opacity-[0.8] h-full flex grid grid-cols-4 xl:grid-cols-6 gap-10 sm:gap-12 ">
+                    <div className="opacity-[0.8] h-full flex grid grid-cols-4 xl:grid-cols-6 gap-10 sm:gap-6 ">
                         {
                             renderServices()
                         }
                     </div>
                 </div>
 
-                <p className="max-w-xl py-2 mx-12 text-xl lg:text-2xl  text-start text-white ">
-                    We tailor software to your needs. Working with web, mobile, and embedded platforms.
-                    We can custom develop and design your system from idea to production.  </p>
-                <p className="max-w-xl py-2 mx-12 text-xl lg:text-2xl  text-start text-white ">
-                    We work with all major
-                    infastructures like Azure, GCP, and AWS, and are able to implement available solutions or build
-                    them from the ground up. </p>
+                <div className="flex flex-row justify-between items-end">
 
-                    <p className="max-w-xl py-2 mx-12 text-xl lg:text-2xl  text-start text-white ">
-                   We take your project from start to finish! From design, developing, 
-                   and deploying to the cloud, web, or app store, to lower level systems like micro 
-                   controllers and Linux distributions, we will bring the project from idea to reality. </p>
-                <p className="max-w-xl py-2 mx-12 text-xl lg:text-2xl  text-start text-white ">
-                    Let us help you make your idea come alive today!
+                    <p className="max-w-4xl py-2 m-3 flex-row text-start text-lg lg:text-xl text-white ">
+                        We tailor software to your needs. Working with web, mobile, and embedded platforms.
+                        We tailor and design your system from idea to production.
+                    </p>
+                    <PhoneEmojiSVG w={200} h={200} color1={"#22bb22"} />
+                </div>
+
+                <div className="flex flex-row justify-between items-end">
+                    <ComputerEmojiSVG w={200} h={200} color3={"#444"} color5={"#22bb22"} />
+                    <p className="max-w-4xl py-2 m-3  text-end  text-lg lg:text-xl text-white ">
+                        We work with all major
+                        infastructures like Azure, GCP, and AWS, and are able to implement available solutions or build
+                        them from the ground up.
+
+                    </p>
+                </div>
+
+                <p className="max-w-4xl py-2 m-3 mr-6 text-start text-lg lg:text-xl text-white ">
+                    We take your project from start to finish... and that's something to 
+                    <button onClick={()=>setCelebrate(true)} className="default-btn text-black text-sm"> 👉🏼 celebrate</button>
+                    about!
                 </p>
-                <p className="max-w-xl py-2 mx-12 text-xl lg:text-2xl  text-start text-white ">
+                {/* <p className="max-w-4xl py-2 m-3 ml-6  text-end  text-lg lg:text-xl text-white  ">
+                    From design, developing,
+                    and deploying to the cloud, web, or app store, to lower level systems like micro
+                    controllers and Linux distributions, we will bring the project from idea to reality. 
+                  
+                    </p> */}
+                <p className="max-w-4xl py-2 m-3 ml-6  text-end  text-lg lg:text-xl text-white  ">
                     Reach out to us through our contact page and happy programming!
                 </p>
+                <p className="max-w-4xl py-2 m-3 mr-6 text-start text-lg lg:text-xl text-white ">
+                    Let us help you make your idea come alive today!
+                </p>
+
                 <br />
                 <br />
                 <br />

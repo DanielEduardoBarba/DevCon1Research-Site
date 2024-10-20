@@ -3,7 +3,7 @@ import AppContext from "../AppContext"
 
 export default function Chat() {
     const [hideBeacon, setHideBeacon] = useState(true)
-    const {scene, setScene }=useContext(AppContext)
+    const {scene, goToScene }=useContext(AppContext)
 
     const screenWidth = window.innerWidth
 
@@ -20,7 +20,7 @@ export default function Chat() {
         <div onClick={() => setHideBeacon(true)} style={{
             backgroundColor:   "pink"  , 
             transform: hideBeacon ? `translateX(-${screenWidth}px)` : ""
-        }} className="absolute bottom-0 left-0 overflow-hidden duration-1000 ease pt-t pr-9  transition-all rounded-tr-full">
+        }} className="absolute z-[1000] bottom-0 left-0 overflow-hidden duration-1000 ease pt-t pr-9  transition-all rounded-tr-full">
 
             <div className="relative w-full h-full">
                 <div style={{
@@ -33,7 +33,9 @@ export default function Chat() {
                     <p className="text-xs m-2">
                         Got a project?
                     </p>
-                    <a onClick={() => setScene(2)} className="text-xs m-2 cursor-pointer underline whitespace-nowrap">
+                    <a onClick={() =>{
+                        goToScene(3)
+                    }} className="text-xs m-2 cursor-pointer underline whitespace-nowrap">
                         Let's Talk!
                     </a>
                 </div>

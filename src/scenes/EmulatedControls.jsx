@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import Pedals from "../components/Pedals"
 import Steering from "../components/Steering"
+import ArrowSVG from "../assets/ArrowSVG"
 
 
 
@@ -54,44 +55,44 @@ export default function EmulatedControls() {
     return (
         <div className="relative h-full w-screen flex-col items-center ">
             <div className="absolute bottom-0 w-screen flex flex-col-reverse lg:flex-row  justify-between">
-
-                <div className="relative z-0 w-min h-min ">
-                    <Steering w={300} h={300}
-                        turnFx={setSteer} />
-                    <div onClick={()=>setSteer(0)} className="absolute bottom-0 w-full flex flex-row justify-between">
+            <div className="flex flex-row justify-start translate-x-[-20px]">
+                    <Pedals h={125} brakeFx={() => {
+                        releaseKey("ArrowUp")
+                    }} accelFx={() => {
+                        holdKey("ArrowUp")
+                    }} />
+                </div>
+                    <div onClick={() => setSteer(0)} className="absolute bottom-0 right-0 bg-gray-400 rounded-xl flex flex-row justify-between">
                         <button
                             onTouchStart={() => holdKey("ArrowLeft")}
                             onTouchEnd={() => releaseKey("ArrowLeft")}
                             onMouseDown={() => holdKey("ArrowLeft")}
                             onMouseUp={() => releaseKey("ArrowLeft")}
+                            style={{ backgroundColor: "black" }}
                             className="default-btn">
-                            Left
+                            <ArrowSVG w={50} h={50} deg={180} />
+                        </button>
+                        <button
+                            onTouchStart={() => holdKey(" ")}
+                            onTouchEnd={() => releaseKey(" ")}
+                            onMouseDown={() => holdKey(" ")}
+                            onMouseUp={() => releaseKey(" ")}
+                            style={{ backgroundColor: "black" }}
+                            className="default-btn">
+                            <ArrowSVG w={50} h={50} deg={270} />
                         </button>
                         <button
                             onTouchStart={() => holdKey("ArrowRight")}
                             onTouchEnd={() => releaseKey("ArrowRight")}
                             onMouseDown={() => holdKey("ArrowRight")}
                             onMouseUp={() => releaseKey("ArrowRight")}
+                            style={{ backgroundColor: "black" }}
                             className="default-btn">
-                            Right
+                            <ArrowSVG w={50} h={50} deg={0} />
                         </button>
                     </div>
-                </div>
-
-
-
-                <div className="w-full flex flex-row justify-end pr-4 lg:pr-9">
-
-
-                    <Pedals h={150} brakeFx={() => {
-                        releaseKey("ArrowUp")
-                    }} accelFx={() => {
-                        holdKey("ArrowUp")
-                    }} />
-
-
-
-                </div>
+               
+                
             </div>
         </div>
     )

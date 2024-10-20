@@ -35,24 +35,25 @@ export default function Header() {
             goToScene(i)
             setShowMenu(false)
         }} style={{
-            backgroundColor: scene == i ? "#cccccc" : "transparent", 
-            color: scene == i ? "black" : "white", 
+            backgroundColor: scene == i ? "#999" : "transparent", 
             textShadow:scene != i?"1px 1px 5px black":""
-        }} className="default-btn flex px-6 py-2 mx-2 border-2 cursor-pointer hover:border-2 border-transparent hover:border-red-500 rounded-xl">
-            {opt}
+        }} className="flex px-6 py-2 mx-2 border-2 cursor-pointer border-transparent hover:border-red-500 rounded-xl">
+           <p className="text-black lg:text-white">
+             {opt}
+            </p>
         </a>)
 
     }
 
     return (
-        <header className="  z-10 flex w-full justify-between">
+        <header className=" z-10 flex w-full justify-between">
             <div className="p-4 pb-0">
                 <Logo h={50} />
             </div>
 
 
             <div className="flex items-center z-10">
-                <nav className="items-center  text-lg text-gray-800 uppercase hidden lg:block lg:flex">
+                <nav className="items-center hidden lg:block lg:flex">
                     {
                         renderMenu()
                     }
@@ -72,7 +73,7 @@ export default function Header() {
                     <div className="z-10 relative  inline-block text-left lg:hidden">
                         <div className="absolute  right-0 w-56 mt-8 mr-4 origin-top-right bg-white rounded-2xl shadow-lg">
                             <div ref={ref} className="py-1" >
-                                <nav className="z-1000 items-center text-lg text-gray-800  lg:flex">
+                                <nav className="z-1000 items-center lg:flex">
                                     {
                                         renderMenu()
                                     }
