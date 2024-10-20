@@ -120,7 +120,7 @@ export default function Services() {
                 </div>
 
                 <div className="flex flex-row justify-between items-end">
-                    <ComputerEmojiSVG w={200} h={200} color3={"#444"} color5={"#22bb22"} />
+                    <ComputerEmojiSVG w={200} h={200} color5={"#22bb22"} />
                     <p className="max-w-4xl py-2 m-3  text-end  text-lg lg:text-xl text-white ">
                         We work with all major
                         infastructures like Azure, GCP, and AWS, and are able to implement available solutions or build

@@ -62,7 +62,7 @@ export default function EmulatedControls() {
                         holdKey("ArrowUp")
                     }} />
                 </div>
-                    <div onClick={() => setSteer(0)} className="absolute bottom-0 right-0 bg-gray-400 rounded-xl flex flex-row justify-between">
+                    <div onClick={() => setSteer(0)} className="absolute bottom-0 right-0 bg-gray-400 m-2 rounded-xl flex flex-row justify-between">
                         <button
                             onTouchStart={() => holdKey("ArrowLeft")}
                             onTouchEnd={() => releaseKey("ArrowLeft")}
