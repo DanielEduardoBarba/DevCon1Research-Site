@@ -72,7 +72,7 @@ export default function Contact() {
 
                     <div className="flex max-w-sm space-x-3 ">
 
-                        <form className="z-100000 w-full max-w-2xl px-5 py-10 m-auto mt-10 bg-[#ffffffdd] border-2 border-black rounded-lg shadow ">
+                        <form className="z-100000 w-full max-w-2xl px-5 py-10 m-auto mt-10 bg-[#ffffffdd] border-2 border-black rounded-3xl shadow ">
                             {
                                 error
                                     ? <div className="mb-6 text-sm font-light text-center text-red-500 t">
@@ -86,9 +86,14 @@ export default function Contact() {
                                             </a>
                                             </p>
                                             <a href="tel:+19549020115" className="default-btn mt-2 w-min whitespace-nowrap">Call Now!</a>
-                                            <h1 className=" text-xl font-light text-center text-gray-800 ">
-                                        Or leave us a message!
-                                            </h1>
+                                            {
+                                                !servRes
+                                                ?<h1 className=" text-xl font-light text-center text-gray-800 ">
+                                                Or leave us a message!
+                                                    </h1>
+                                                :null
+                                            }
+                                            
                                     </div>
                             }
                             <div className="grid max-w-xl grid-cols-2 gap-4 m-auto">

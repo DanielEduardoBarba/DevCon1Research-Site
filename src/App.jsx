@@ -44,7 +44,7 @@ export default function App({ routeScene = 0 }) {
     goToScene(routeScene)
     setPageWidth(window.innerWidth)
 
-    setTimeout(() => setLoadRest(true), 7000)
+    setTimeout(() => setLoadRest(true), 3000)
     window.addEventListener("resize", handleResize)
     return () => {
       window.removeEventListener("resize", handleResize)

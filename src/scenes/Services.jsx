@@ -131,7 +131,11 @@ export default function Services() {
 
                 <p className="max-w-4xl py-2 m-3 mr-6 text-start text-lg lg:text-xl text-white ">
                     We take your project from start to finish... and that's something to 
-                    <button onClick={()=>setCelebrate(true)} className="default-btn text-black text-sm"> 👉🏼 celebrate</button>
+                    <button onClick={()=>setCelebrate(cl=>cl?false:true)} 
+                    style={{
+                        backgroundColor:celebrate?"#33ff33":"",
+                         boxShadow:celebrate?"0px 0px 52px 5px #33ff33":""
+                    }} className="default-btn text-black text-sm"> 👉🏼 celebrate</button>
                     about!
                 </p>
                 {/* <p className="max-w-4xl py-2 m-3 ml-6  text-end  text-lg lg:text-xl text-white  ">
