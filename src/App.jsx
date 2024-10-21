@@ -10,6 +10,8 @@ import EmulatedKeys from './scenes/EmulatedControls'
 import AppContext from './AppContext'
 import LoadingPage from './components/LoadingPage'
 import './App.css'
+import QRApp from './scenes/QRApp'
+import AboutUs from './scenes/AboutUs'
 
 const defaultUser = {}
 export default function App({ routeScene = 0 }) {
@@ -30,9 +32,21 @@ export default function App({ routeScene = 0 }) {
     useRef(null),
     useRef(null),
     useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
     useRef(null)
   ]
   const timeoutIDs = [
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
     useRef(null),
     useRef(null),
     useRef(null),
@@ -42,6 +56,7 @@ export default function App({ routeScene = 0 }) {
   useEffect(() => {
     getUser()
     goToScene(routeScene)
+    console.log("route scene: ", routeScene)
     setPageWidth(window.innerWidth)
 
     setTimeout(() => setLoadRest(true), 3000)
@@ -130,28 +145,36 @@ export default function App({ routeScene = 0 }) {
     // console.log("opacity", opacity)
     return opacity > 0 ? opacity * multiplier : 0
   }
-
-
-  const appScenes = [
-    <Home />,
-    <Services />,
-    <EmulatedKeys />,
-    <Contact />
-  ]
-
+  
   function renderApp() {
     return appScenes.map((app, i) => <div
-      ref={sceneRef[i]} key={i}
-      style={{
-        opacity: focusValue(i),
-        width: "100vw"
-      }} className="w-screen">
+    ref={sceneRef[i]} key={i}
+    style={{
+      opacity: focusValue(i),
+      width: "100vw"
+    }} className="w-screen">
       {app}
     </div>)
   }
   async function delay(ts) {
     return new Promise((resolve, reject) => setTimeout(() => resolve(), ts))
   }
+  const sceneDelay=async (_scene, trueFx=()=>{},falseFx=()=>{})=>{
+    if(scene==_scene){
+        await delay(500)
+        trueFx()
+    }else{
+      falseFx()
+    }
+}
+  const appScenes = [
+    <Home />,
+    <Services />,
+    <AboutUs />,
+    <QRApp />,
+    <EmulatedKeys />,
+    <Contact />
+  ]
   return (
     <AppContext.Provider value={{
       user, saveUser,
@@ -159,7 +182,8 @@ export default function App({ routeScene = 0 }) {
       setScene,
       goToScene,
       setLockScroll,
-      delay
+      delay,
+      sceneDelay
     }}>
       <main onLoad={() => {
         setTimeout(() => {
@@ -180,7 +204,7 @@ export default function App({ routeScene = 0 }) {
         {
           loadRest
             ? <Spline style={{
-                opacity: focusValue(2)
+                opacity: focusValue(4)
               }} scene={"https://prod.spline.design/A1i-MMZ2Ie1NTvif/scene.splinecode"}
                 className="absolute z-0 w-full h-full" />
             : null
