@@ -9,9 +9,11 @@ import Footer from "./components/Footer"
 import EmulatedKeys from './scenes/EmulatedControls'
 import AppContext from './AppContext'
 import LoadingPage from './components/LoadingPage'
-import './App.css'
 import QRApp from './scenes/QRApp'
 import AboutUs from './scenes/AboutUs'
+import { analytics } from './firebase.js'
+import './App.css'
+import { getAnalytics, logEvent } from 'firebase/analytics'
 
 const defaultUser = {}
 export default function App({ routeScene = 0 }) {
@@ -55,6 +57,10 @@ export default function App({ routeScene = 0 }) {
   ]
   useEffect(() => {
     getUser()
+    logEvent(analytics,'Hyper link selection', {
+      scene: routeScene,
+      pageName: menuOptions[routeScene]
+    })
     goToScene(routeScene)
     console.log("route scene: ", routeScene)
     setPageWidth(window.innerWidth)
@@ -107,14 +113,14 @@ export default function App({ routeScene = 0 }) {
   }
 
   const goToScene = (_scene) => {
-    // if (_scene != scene) {
+
+ logEvent(analytics,'Menu selection', {
+      scene,
+      pageName: menuOptions[scene]
+    })
     setScene(_scene)
     sceneRef[_scene].current.scrollIntoView({ behavior: 'smooth' })
-    // user.scene = _scene
-    // saveUser(user)
     setLoadRest(true)
-    // }
-
   }
 
   const handleScroll = (event) => {
@@ -145,28 +151,28 @@ export default function App({ routeScene = 0 }) {
     // console.log("opacity", opacity)
     return opacity > 0 ? opacity * multiplier : 0
   }
-  
+
   function renderApp() {
     return appScenes.map((app, i) => <div
-    ref={sceneRef[i]} key={i}
-    style={{
-      opacity: focusValue(i),
-      width: "100vw"
-    }} className="w-screen">
+      ref={sceneRef[i]} key={i}
+      style={{
+        opacity: focusValue(i),
+        width: "100vw"
+      }} className="w-screen">
       {app}
     </div>)
   }
   async function delay(ts) {
     return new Promise((resolve, reject) => setTimeout(() => resolve(), ts))
   }
-  const sceneDelay=async (_scene, trueFx=()=>{},falseFx=()=>{})=>{
-    if(scene==_scene){
-        await delay(500)
-        trueFx()
-    }else{
+  const sceneDelay = async (_scene, trueFx = () => { }, falseFx = () => { }) => {
+    if (scene == _scene) {
+      await delay(500)
+      trueFx()
+    } else {
       falseFx()
     }
-}
+  }
   const appScenes = [
     <Home />,
     <Services />,
@@ -175,10 +181,19 @@ export default function App({ routeScene = 0 }) {
     <EmulatedKeys />,
     <Contact />
   ]
+
+  const menuOptions = [
+    "Home",
+    "Services",
+    "About Us",
+    "QR Generator",
+    "Demo App",
+    "Contact Us"
+  ]
   return (
     <AppContext.Provider value={{
       user, saveUser,
-      scene,
+      scene, menuOptions,
       setScene,
       goToScene,
       setLockScroll,
@@ -204,9 +219,9 @@ export default function App({ routeScene = 0 }) {
         {
           loadRest
             ? <Spline style={{
-                opacity: focusValue(4)
-              }} scene={"https://prod.spline.design/A1i-MMZ2Ie1NTvif/scene.splinecode"}
-                className="absolute z-0 w-full h-full" />
+              opacity: focusValue(4)
+            }} scene={"https://prod.spline.design/A1i-MMZ2Ie1NTvif/scene.splinecode"}
+              className="absolute z-0 w-full h-full" />
             : null
         }
         <Header />

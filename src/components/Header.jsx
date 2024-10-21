@@ -5,7 +5,7 @@ import AppContext from "../AppContext"
 
 export default function Header() {
     const [showMenu, setShowMenu] = useState(false)
-    const{scene, goToScene}=useContext(AppContext)
+    const{scene,menuOptions, goToScene}=useContext(AppContext)
     const ref = useRef(null)
 
     useEffect(() => {
@@ -23,17 +23,10 @@ export default function Header() {
         }
     })
 
-    const options = [
-        "Home",
-        "Services",
-        "About Us",
-        "QR Generator",
-        "Demo App",
-        "Contact Us"
-    ]
+  
 
     const renderMenu = () => {
-        return options.map((opt, i) => <a key={i} onClick={() => {
+        return menuOptions.map((opt, i) => <a key={i} onClick={() => {
             goToScene(i)
             setShowMenu(false)
         }} style={{
