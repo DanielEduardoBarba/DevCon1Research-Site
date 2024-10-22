@@ -13,7 +13,7 @@ import QRApp from './scenes/QRApp'
 import AboutUs from './scenes/AboutUs'
 import { analytics } from './firebase.js'
 import './App.css'
-import { getAnalytics, logEvent } from 'firebase/analytics'
+import { logEvent } from 'firebase/analytics'
 
 const defaultUser = {}
 export default function App({ routeScene = 0 }) {
@@ -42,6 +42,7 @@ export default function App({ routeScene = 0 }) {
     useRef(null),
     useRef(null)
   ]
+
   const timeoutIDs = [
     useRef(null),
     useRef(null),
@@ -55,6 +56,7 @@ export default function App({ routeScene = 0 }) {
     useRef(null),
     useRef(null)
   ]
+
   useEffect(() => {
     getUser()
     logEvent(analytics,'Hyper link selection', {
@@ -71,7 +73,6 @@ export default function App({ routeScene = 0 }) {
       window.removeEventListener("resize", handleResize)
     }
   }, [])
-
 
   function saveUser(_user) {
     localStorage.setItem(lsAppName, JSON.stringify(_user))

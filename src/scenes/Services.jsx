@@ -5,7 +5,7 @@ import Confetti from "react-confetti"
 
 
 export default function Services() {
-    const [celebrate,setCelebrate] = useState(false)
+    const [celebrate, setCelebrate] = useState(false)
     const dispatchID = useRef(null)
     const dispatchPopup = (i) => {
 
@@ -30,14 +30,15 @@ export default function Services() {
         return order[i]
     }
     useEffect(() => {
-        dispatchID.current=setInterval(() => {
-            if(celebrate)return
+        dispatchID.current = setInterval(() => {
+            if (celebrate) return
             dispatchPopup(nextI())
             dispatchPopup(nextI())
             //    dispatchPopup(nextI()) 
             //    dispatchPopup(nextI()) 
         }, 1000)
     }, [])
+
     // useEffect(() => {
     //     if(celebrate){
     //         clearInterval(dispatchID.current)
@@ -71,8 +72,6 @@ export default function Services() {
         , "https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg"
     ]
 
-
-
     function renderServices() {
         const elements = []
         for (let i = 0; i < services.length; i++) {
@@ -86,14 +85,13 @@ export default function Services() {
         return elements
     }
 
-
     return (
-        <div className="h-full w-screen overflow-scroll ">
-{
-    celebrate
-    ?<Confetti width={window.innerWidth} hieght={window.innerHeight}  />
-    :null
-}
+        <div className="h-full w-screen pt-[50px] lg:pt-[60px] overflow-scroll ">
+            {
+                celebrate
+                    ? <Confetti width={window.innerWidth} hieght={window.innerHeight} />
+                    : null
+            }
 
             <div className="relative flex flex-col items-center justify-center align-center ">
                 <h2 className="my-6 p-1 text-2xl text-center text-white ">
@@ -130,12 +128,12 @@ export default function Services() {
                 </div>
 
                 <p className="max-w-4xl py-2 m-3 mr-6 text-start text-lg lg:text-xl text-white ">
-                    We take your project from start to finish... and that's something to 
-                    <button onClick={()=>setCelebrate(cl=>cl?false:true)} 
-                    style={{
-                        backgroundColor:celebrate?"#33ff33":"",
-                         boxShadow:celebrate?"0px 0px 52px 5px #33ff33":""
-                    }} className="default-btn text-black text-sm"> 👉🏼 celebrate</button>
+                    We take your project from start to finish... and that's something to
+                    <button onClick={() => setCelebrate(cl => cl ? false : true)}
+                        style={{
+                            backgroundColor: celebrate ? "#33ff33" : "",
+                            boxShadow: celebrate ? "0px 0px 52px 5px #33ff33" : ""
+                        }} className="default-btn text-black text-sm"> 👉🏼 celebrate</button>
                     about!
                 </p>
                 {/* <p className="max-w-4xl py-2 m-3 ml-6  text-end  text-lg lg:text-xl text-white  ">

@@ -53,7 +53,7 @@ export default function EmulatedControls() {
 
 
     return (
-        <div className="relative h-full w-screen flex-col items-center ">
+        <div className="relative h-full w-screen pt-[50px] lg:pt-[60px] flex-col items-center ">
             <div className="absolute bottom-0 w-screen flex flex-col-reverse lg:flex-row  justify-between">
             <div className="flex flex-row justify-start translate-x-[-20px]">
                     <Pedals h={125} brakeFx={() => {

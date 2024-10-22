@@ -1,3 +1,4 @@
 {
-    "api":"https://devcon1solutions-api.web.app"
+    "api":"https://devcon1solutions-api.web.app",
+    "dev":"http://localhost:5000"
 }

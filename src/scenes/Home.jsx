@@ -22,9 +22,9 @@ const {goToScene}=useContext(AppContext)
                     </div></>
     }
     return (
-            <div className="flex flex-col items-center justify-between h-[200vh] border-6 border-green-400">
-                <div className="relative flex w-screen flex-col">
-                    <div className="absolute mt-14 md:mt-4 lg:mt-16">
+            <div className="flex flex-col items-center w-screen h-full  pt-[50px]  lg:pt-[60px] justify-between  border-6 border-green-400">
+                <div className="relative flex w-full  flex-col">
+                    <div className="absolute mt-24 md:mt-16">
 
                     {hero()}
                     </div>

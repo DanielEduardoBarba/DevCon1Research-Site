@@ -26,7 +26,7 @@ export default function AboutUs() {
     ]
 
     return (
-        <div className="h-full w-screen overflow-scroll ">
+        <div className="h-full w-screen pt-[60px] overflow-scroll ">
 
             <div className="relative flex flex-col items-center justify-center align-center ">
                 <h2 className="my-6 p-1 text-2xl text-center text-white ">
@@ -46,7 +46,7 @@ export default function AboutUs() {
 
                     <div style={{
                         opacity: show ? 1 : 0
-                    }} className="w-full duration-1000 flex flex-row z-[1000] justify-start items-end">
+                    }} className="w-full duration-1000 flex flex-row z-[10000] justify-start items-end">
                         <a href="https://www.linkedin.com/in/daniel-e-barba/"
                             className="mx-4 lg:mx-8">
                             <img src={LINKEDIN} className="h-full bg-white max-h-12  border-2 border-white rounded-lg" />
@@ -60,7 +60,7 @@ export default function AboutUs() {
                     <div style={{
                         width: show ? image[0].current?.offsetWidth : people[0].current?.offsetWidth,
                         height: show ? image[0].current?.offsetHieght : people[0].current?.offsetHieght,
-                    }} className="absolute  h-full duration-1000 right-0 flex flex-col justify-start items-start mr-4 z-[10000]">
+                    }} className="absolute  h-full duration-1000 right-0 flex flex-col justify-start items-start mr-4 z-[1000]">
 
                         <img ref={image[0]} src={DAN} className="h-full bg-black max-h-48  border-2 border-white rounded-3xl" />
                     </div>
@@ -73,7 +73,7 @@ export default function AboutUs() {
                 <div ref={people[1]} className="relative w-full lg:w-3/4 p-4 flex flex-row justify-between ">
                     <div style={{
                         opacity: show ? 1 : 0
-                    }} className="w-full duration-1000 flex flex-row z-[1000] justify-end items-end">
+                    }} className="w-full duration-1000 flex flex-row z-[10000] justify-end items-end">
                         {/* <a href="https://www.linkedin.com/in/daniel-e-barba/"
                             className="mx-4 lg:mx-8">
                             <img src={LINKEDIN} className="h-full bg-white max-h-12  border-2 border-white rounded-lg" />
@@ -86,7 +86,7 @@ export default function AboutUs() {
                     <p style={{
                         color: "white",
                         opacity: show ? 1 : 0
-                    }} className="max-w-xl w-3/4 text-md text-end lg:text-lg duration-1000">
+                    }} className="max-w-xl w-3/4 text-md text-end lg:text-lg duration-[1000]">
                         Gabriela brings over 6 years of experience
                         in accounting, bookkeeping, and payroll. Known for her proactive and practical
                         approach, she values building trust
@@ -96,7 +96,7 @@ export default function AboutUs() {
                     <div style={{
                         width: show ? image[1].current?.offsetWidth : people[1].current?.offsetWidth,
                         height: show ? image[1].current?.offsetHieght : people[1].current?.offsetHieght,
-                    }} className="absolute  h-full duration-1000 left-0 flex flex-col justify-start items-end mr-4 z-[10000]">
+                    }} className="absolute  h-full duration-1000 left-0 flex flex-col justify-start items-end mr-4 z-[1000]">
 
                         <img ref={image[1]} src={GABBY} className="h-full bg-black max-h-48  border-2 border-white rounded-3xl" />
                     </div>
