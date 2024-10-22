@@ -1,6 +1,7 @@
 import SpinnerSVG from "../assets/SpinnerSVG"
 import { useState } from "react"
 import { server } from "../server"
+import secrets from '../secrets.json'  
 
 export default function Contact() {
     const [servRes, setServRes] = useState("")
@@ -8,8 +9,7 @@ export default function Contact() {
     const [isSent, setIsSent] = useState(false)
 
     const handleContact = (e) => {
-        e.preventDefault()
-
+        e.preventDefault() 
         let pkg = {}
 
         try {
@@ -33,7 +33,8 @@ export default function Contact() {
                 name,
                 email,
                 phone,
-                comment
+                comment,
+                key: secrets?.key
             }
         } catch (err) {
             console.log("Error occured finding name, email, or comment", err)
@@ -48,8 +49,9 @@ export default function Contact() {
         document.getElementById("phone").style.opacity = 0.5
         document.getElementById("comment").style.opacity = 0.5
 
+        console.log("SENDING: ",  pkg )
         // return
-        fetch(`${server()}/contact/form`, {
+        fetch(`${server()}/devcon/contact/form`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -57,7 +59,10 @@ export default function Contact() {
             body: JSON.stringify(pkg)
         }).then(incoming => {
             if (incoming.status == 200) setServRes("Message sent succesfully!")
-            else setServRes("Error occurred!")
+            else {
+                setServRes("Error occurred!")
+                return
+            }
             return incoming.json()
         }).then(response => {
             console.log("Server responded: ", response)
