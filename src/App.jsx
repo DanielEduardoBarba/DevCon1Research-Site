@@ -59,12 +59,10 @@ export default function App({ routeScene = 0 }) {
 
   useEffect(() => {
     getUser()
-    logEvent(analytics,'Hyper link selection', {
+    logEvent(analytics, 'Hyper link selection', {
       scene: routeScene,
       pageName: menuOptions[routeScene]
     })
-    goToScene(routeScene)
-    console.log("route scene: ", routeScene)
     setPageWidth(window.innerWidth)
 
     setTimeout(() => setLoadRest(true), 3000)
@@ -113,15 +111,18 @@ export default function App({ routeScene = 0 }) {
     }, 100)
   }
 
-  const goToScene = (_scene) => {
+  const goToScene = (_scene, minimalLoad = false) => {
 
- logEvent(analytics,'Menu selection', {
+    logEvent(analytics, 'Menu selection', {
       scene,
       pageName: menuOptions[scene]
     })
     setScene(_scene)
-    sceneRef[_scene].current.scrollIntoView({ behavior: 'smooth' })
-    setLoadRest(true)
+    if (!minimalLoad){
+      setLoadRest(true)
+      sceneRef[_scene].current.scrollIntoView({ behavior: 'smooth' })
+    }
+      
   }
 
   const handleScroll = (event) => {
@@ -203,8 +204,13 @@ export default function App({ routeScene = 0 }) {
     }}>
       <main onLoad={() => {
         setTimeout(() => {
-          setIsLoading(false)
-        }, 1000)
+          goToScene(routeScene,routeScene!=4)
+          console.log("route scene: ", routeScene)
+          setTimeout(() => {
+            setIsLoading(false)
+          }, 700)
+
+        }, 500)
       }} style={{
         height: "100svh"
       }} className="relative flex flex-col overflow-hidden font-mono bg-black  ">

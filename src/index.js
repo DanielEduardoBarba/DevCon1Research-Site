@@ -15,7 +15,7 @@ root.render(
         <Route path="/aboutus" element={<App routeScene={2} />} />
         <Route path="/qrapp" element={<App routeScene={3} />} />
         <Route path="/demoapp" element={<App routeScene={4} />} />
-        <Route path="/contact" element={<App routeScene={5} />} />
+        <Route path="/contactus" element={<App routeScene={5} />} />
       </Routes>
     </Router>
   </React.StrictMode>
