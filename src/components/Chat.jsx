@@ -41,7 +41,7 @@ export default function Chat() {
                         Got a project?
                     </p>
                     <a onClick={() => {
-                        goToScene(3)
+                        goToScene(5)
                     }} className="text-xs  font-bold m-0 cursor-pointer underline whitespace-nowrap">
                         Let's Talk!
                     </a>

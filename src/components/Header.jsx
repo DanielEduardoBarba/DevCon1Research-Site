@@ -32,7 +32,7 @@ export default function Header() {
         }} style={{
             backgroundColor: scene == i ? "#999" : "transparent", 
             textShadow:scene != i?"1px 1px 5px black":""
-        }} className="flex px-4 py-1 mx-2 my-1 border-2 cursor-pointer border-transparent hover:border-red-500 rounded-xl">
+        }} className="flex px-4 py-1 mx-2 my-1 border-2 cursor-pointer border-transparent hover:border-red-500 rounded-lg">
            <p className="text-black lg:text-white whitespace-nowrap">
              {opt}
             </p>
@@ -65,8 +65,8 @@ export default function Header() {
                 {showMenu
                     ?
                     <div className="z-10 relative inline-block text-left lg:hidden">
-                        <div className="absolute right-0 w-56 mt-0 mr-4 origin-top-right bg-white rounded-2xl shadow-lg">
-                            <div ref={ref} className="py-0" >
+                        <div className="absolute right-0 w-56 mt-0 mr-4 origin-top-right bg-white rounded-xl shadow-lg">
+                            <div ref={ref} className="py-1" >
                                 <nav className="z-1000 items-center lg:flex">
                                     {
                                         renderMenu()
