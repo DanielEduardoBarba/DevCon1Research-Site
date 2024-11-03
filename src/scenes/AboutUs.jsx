@@ -67,21 +67,14 @@ export default function AboutUs() {
                 </div>
 
 
-                <p className=" text-md md:text-lg font-bold text-center text-white border-b-2 rounded-xl px-8 mb-2 mt-16 ">
+                {/* <p className=" text-md md:text-lg font-bold text-center text-white border-b-2 rounded-xl px-8 mb-2 mt-16 ">
                     Gabby
-                </p>
-                <div ref={people[1]} className="relative w-full lg:w-3/4 p-4 flex flex-row justify-between ">
+                </p> */}
+                {/* <div ref={people[1]} className="relative w-full lg:w-3/4 p-4 flex flex-row justify-between ">
                     <div style={{
                         opacity: show ? 1 : 0
                     }} className="w-full duration-1000 flex flex-row z-[10000] justify-end items-end">
-                        {/* <a href="https://www.linkedin.com/in/daniel-e-barba/"
-                            className="mx-4 lg:mx-8">
-                            <img src={LINKEDIN} className="h-full bg-white max-h-12  border-2 border-white rounded-lg" />
-                        </a>
-                        <a href="https://github.com/DanielEduardoBarba/"
-                            className="mx-4 lg:mx-8">
-                            <img src={GITHUB} className="h-full bg-black max-h-12  border-2 border-white rounded-lg" />
-                        </a> */}
+                       
                     </div>
                     <p style={{
                         color: "white",
@@ -100,7 +93,7 @@ export default function AboutUs() {
 
                         <img ref={image[1]} src={GABBY} className="h-full bg-black max-h-48  border-2 border-white rounded-3xl" />
                     </div>
-                </div>
+                </div> */}
                 <br />
                 <br />
                 <br />
